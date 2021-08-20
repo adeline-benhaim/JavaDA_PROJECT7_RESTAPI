@@ -22,4 +22,21 @@ public interface BidListService {
      */
     List<BidListDto> getAllBidList();
 
+    /**
+     * Get a bid
+     *
+     * @param id of the requested bid
+     * @return bid found by id
+     */
+    BidListDto getBidListById(Integer id);
+
+    /**
+     * Update a bid
+     *
+     * @param id bid id to update
+     * @param bidListDto bid to update
+     * @return bid updated
+     */
+    BidList updateBidList(Integer id, BidListDto bidListDto);
+
 }

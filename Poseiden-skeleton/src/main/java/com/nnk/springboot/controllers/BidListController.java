@@ -1,6 +1,5 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Dto.BidListDto;
 import com.nnk.springboot.service.BidListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,7 @@ public class BidListController {
     private BidListService bidListService;
 
     @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         List<BidListDto> bidList = bidListService.getAllBidList();
         model.addAttribute("bidList", bidList);
         return "bidList/list";
@@ -46,15 +44,19 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
+        BidListDto bidListToUpdate = bidListService.getBidListById(id);
+        model.addAttribute("bidList", bidListToUpdate);
         return "bidList/update";
     }
 
     @PostMapping("/bidList/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
-        return "redirect:/bidList/list";
+    public String updateBid(@PathVariable("id") Integer id, @Valid BidListDto bidListDto, BindingResult result, Model model) {
+        if (!result.hasErrors()) {
+            bidListService.updateBidList(id, bidListDto);
+            return "redirect:/bidList/list";
+        }
+        model.addAttribute("bidList", bidListDto);
+        return "/bidList/update/{id}";
     }
 
     @GetMapping("/bidList/delete/{id}")

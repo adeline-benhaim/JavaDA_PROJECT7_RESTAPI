@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,5 +50,37 @@ public class BidListServiceImpl implements BidListService {
         return bidList
                 .stream().map(MapperDto::convertToBidListDto)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Get a bid
+     *
+     * @param id of the requested bid
+     * @return bid found by id
+     */
+    @Override
+    public BidListDto getBidListById(Integer id) {
+        logger.info("Get a bidList by ID");
+        BidList bidList = bidListRepository.findBidListById(id);
+        return MapperDto.convertToBidListDto(bidList);
+    }
+
+    /**
+     * Update a bid
+     *
+     * @param id         bid id to update
+     * @param bidListDto bid to update
+     * @return bid updated
+     */
+    @Override
+    @Transactional
+    public BidList updateBidList(Integer id, BidListDto bidListDto) {
+        logger.info("Get bidList by id");
+        BidList bidListToUpdate = bidListRepository.findBidListById(id);
+        bidListToUpdate.setAccount(bidListDto.getAccount());
+        bidListToUpdate.setType(bidListDto.getType());
+        bidListToUpdate.setBidQuantity(bidListDto.getBidQuantity());
+        logger.info("BidList updated");
+        return bidListRepository.save(bidListToUpdate);
     }
 }

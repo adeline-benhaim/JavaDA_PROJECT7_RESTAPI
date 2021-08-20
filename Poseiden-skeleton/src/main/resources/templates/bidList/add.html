@@ -14,10 +14,10 @@
     </div>
 
     <div class="row">
-        <form action="#" th:action="@{/bidList/validate}" th:object="${bidList}" method="post" class="form-horizontal"
+        <form th:action="@{/bidList/validate}" th:object="${bidList}" method="post" class="form-horizontal"
               style="width: 100%">
 
-            <div class="alert alert-danger" th:if="${#fields.hasErrors('global')}" >
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('global')}">
                 <p th:errors="*{global}"></p>
             </div>
 
@@ -47,13 +47,11 @@
                     <input
                             type="text" th:field="*{bidQuantity}" class="form-control" id="bidQuantityBidListInput"
                             aria-describedby="bidQuantityBidListHelp" placeholder="Bid Quantity">
-                    <p th:if="${#fields.hasErrors('bidQuantity')}" class="label label-danger"
-                       th:errors="*{bidQuantity}"></p>
                 </div>
             </div>
 
             <div class="row">
-                <button class="btn btn-danger">Cancel</button>
+                <button a th:href="/bidList/list" class="btn btn-danger">Cancel</button>
                 <button type="submit" class="btn btn-primary">Add BidList</button>
             </div>
 
