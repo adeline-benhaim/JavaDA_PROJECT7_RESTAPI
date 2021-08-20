@@ -10,18 +10,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
 public class BidListController {
 
     @Autowired
-    BidListService bidListService;
+    private BidListService bidListService;
 
     @RequestMapping("/bidList/list")
     public String home(Model model)
     {
-        // TODO: call service find all bids to show to the view
+        List<BidListDto> bidList = bidListService.getAllBidList();
+        model.addAttribute("bidList", bidList);
         return "bidList/list";
     }
 
