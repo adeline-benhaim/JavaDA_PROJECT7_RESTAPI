@@ -68,7 +68,7 @@ public class BidListServiceImpl implements BidListService {
     /**
      * Update a bid
      *
-     * @param id         bid id to update
+     * @param id bid id to update
      * @param bidListDto bid to update
      * @return bid updated
      */
@@ -82,5 +82,17 @@ public class BidListServiceImpl implements BidListService {
         bidListToUpdate.setBidQuantity(bidListDto.getBidQuantity());
         logger.info("BidList updated");
         return bidListRepository.save(bidListToUpdate);
+    }
+
+    /**
+     * Delete a bid by Id
+     *
+     * @param id ID of bid to delete
+     */
+    @Override
+    @Transactional
+    public void deleteBidList(Integer id) {
+        logger.info("Delete bidList : " + id);
+        bidListRepository.deleteById(id);
     }
 }

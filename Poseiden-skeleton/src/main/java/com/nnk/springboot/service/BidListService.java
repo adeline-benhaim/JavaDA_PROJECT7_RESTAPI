@@ -33,10 +33,17 @@ public interface BidListService {
     /**
      * Update a bid
      *
-     * @param id bid id to update
+     * @param id         bid id to update
      * @param bidListDto bid to update
      * @return bid updated
      */
     BidList updateBidList(Integer id, BidListDto bidListDto);
+
+    /**
+     * Delete a bid by Id
+     *
+     * @param id ID of bid to delete
+     */
+    void deleteBidList(Integer id);
 
 }
