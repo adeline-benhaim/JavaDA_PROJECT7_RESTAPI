@@ -30,7 +30,6 @@ public class BidListServiceImpl implements BidListService {
     public BidList createBidList(BidListDto bidListDto) {
         logger.info("Create a new bidList");
         BidList newBidList = BidList.builder()
-                .BidListId(bidListDto.getBidListId())
                 .account(bidListDto.getAccount())
                 .type(bidListDto.getType())
                 .bidQuantity(bidListDto.getBidQuantity())
@@ -61,7 +60,7 @@ public class BidListServiceImpl implements BidListService {
     @Override
     public BidListDto getBidListById(Integer id) {
         logger.info("Get a bidList by ID");
-        BidList bidList = bidListRepository.findBidListById(id);
+        BidList bidList = bidListRepository.findBidListByBidListId(id);
         return MapperDto.convertToBidListDto(bidList);
     }
 
@@ -76,7 +75,7 @@ public class BidListServiceImpl implements BidListService {
     @Transactional
     public BidList updateBidList(Integer id, BidListDto bidListDto) {
         logger.info("Get bidList by id");
-        BidList bidListToUpdate = bidListRepository.findBidListById(id);
+        BidList bidListToUpdate = bidListRepository.findBidListByBidListId(id);
         bidListToUpdate.setAccount(bidListDto.getAccount());
         bidListToUpdate.setType(bidListDto.getType());
         bidListToUpdate.setBidQuantity(bidListDto.getBidQuantity());

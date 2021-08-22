@@ -38,9 +38,9 @@
 			</thead>
 			<tbody>
 			<tr th:if="${bidList.empty}">
-				<td colspan="5">No bank account yet</td>
+				<td colspan="5">No bid yet</td>
 			</tr>
-			<tr th:each="bid: ${bidList}">
+			<tr th:each="bidList: ${bidList}">
 				<td><span th:text="${bidList.BidListId}"> Id </span></td>
 				<td><span th:text="${bidList.account}"> Account </span></td>
 				<td><span th:text="${bidList.type}"> Type </span></td>

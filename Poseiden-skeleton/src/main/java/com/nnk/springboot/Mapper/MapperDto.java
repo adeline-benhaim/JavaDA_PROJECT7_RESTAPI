@@ -11,7 +11,7 @@ public class MapperDto {
 
     public static BidListDto convertToBidListDto(BidList bidList) {
         return BidListDto.builder()
-                .BidListId(bidList.getBidListId())
+                .bidListId(bidList.getBidListId())
                 .account(bidList.getAccount())
                 .type(bidList.getType())
                 .bidQuantity(bidList.getBidQuantity())
@@ -20,7 +20,7 @@ public class MapperDto {
 
     public static BidList convertToBidList(BidListDto bidListDto) {
         return BidList.builder()
-                .BidListId(bidListDto.getBidListId())
+                .bidListId(bidListDto.getBidListId())
                 .account(bidListDto.getAccount())
                 .type(bidListDto.getType())
                 .bidQuantity(bidListDto.getBidQuantity())

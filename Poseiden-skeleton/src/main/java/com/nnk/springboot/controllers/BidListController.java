@@ -28,7 +28,7 @@ public class BidListController {
     @GetMapping("/bidList/add")
     public String addBidForm(Model model) {
         BidListDto bidListDto = new BidListDto();
-        model.addAttribute("bidList", bidListDto);
+        model.addAttribute("bidListDto", bidListDto);
         return "bidList/add";
     }
 
@@ -36,16 +36,16 @@ public class BidListController {
     public String validate(@Valid @ModelAttribute BidListDto bidListDto, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             bidListService.createBidList(bidListDto);
-            return "bidList/list";
+            return "redirect:/bidList/list";
         }
-        model.addAttribute("bidList", bidListDto);
+        model.addAttribute("bidListDto", bidListDto);
         return "bidList/add";
     }
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         BidListDto bidListToUpdate = bidListService.getBidListById(id);
-        model.addAttribute("bidList", bidListToUpdate);
+        model.addAttribute("bidListDto", bidListToUpdate);
         return "bidList/update";
     }
 
@@ -55,7 +55,7 @@ public class BidListController {
             bidListService.updateBidList(id, bidListDto);
             return "redirect:/bidList/list";
         }
-        model.addAttribute("bidList", bidListDto);
+        model.addAttribute("bidListDto", bidListDto);
         return "/bidList/update/{id}";
     }
 

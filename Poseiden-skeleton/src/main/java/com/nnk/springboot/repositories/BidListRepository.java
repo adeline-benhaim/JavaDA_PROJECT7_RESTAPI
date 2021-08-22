@@ -13,6 +13,6 @@ public interface BidListRepository extends JpaRepository<BidList, Integer> {
      * @param BidListId bid id sought
      * @return the bid found
      */
-    BidList findBidListById(Integer BidListId);
+    BidList findBidListByBidListId(Integer BidListId);
 
 }
