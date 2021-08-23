@@ -33,9 +33,16 @@ public interface RatingService {
     /**
      * Update a rating
      *
-     * @param id        rating id to update
+     * @param id rating id to update
      * @param ratingDto rating's information to update
      * @return rating updated
      */
     Rating updateRating(Integer id, RatingDto ratingDto);
+
+    /**
+     * Delete a rating by id
+     *
+     * @param id ID of rating to delete
+     */
+    void deleteRating(Integer id);
 }

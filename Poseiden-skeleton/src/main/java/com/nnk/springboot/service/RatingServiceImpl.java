@@ -82,4 +82,16 @@ public class RatingServiceImpl implements RatingService {
         logger.info("Rating updated");
         return ratingRepository.save(ratingToUpdate);
     }
+
+    /**
+     * Delete a rating by id
+     *
+     * @param id ID of rating to delete
+     */
+    @Override
+    @Transactional
+    public void deleteRating(Integer id) {
+        logger.info("Delete rating : " + id);
+        ratingRepository.deleteById(id);
+    }
 }
