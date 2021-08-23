@@ -4,7 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		  integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
@@ -14,10 +15,55 @@
 	</div>
 
 	<div class="row">
-		<form action="#" th:action="@{/rating/validate}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of Rating, there are 2 buttons: Save data and Cancel to the list Rating
-			 -->
+		<form th:action="@{/rating/validate}" th:object="${ratingDto}" method="post" class="form-horizontal" style="width: 100%">
+
+			<div class="alert alert-danger" th:if="${#fields.hasErrors('global')}">
+				<p th:errors="*{global}"></p>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Moodys Rating</label>
+					<input
+							type="text" th:field="*{moodysRating}" class="form-control" id="moodysRatingInput"
+							aria-describedby="moodysRatingHelp" placeholder="Moodys Rating">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Sand P Rating</label>
+					<input
+							type="text" th:field="*{sandPRating}" class="form-control" id="sandPRatingInput"
+							aria-describedby="sandPRatingHelp" placeholder="Sand P Rating">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Fitch Rating</label>
+					<input
+							type="text" th:field="*{fitchRating}" class="form-control" id="fitchRatingInput"
+							aria-describedby="fitchRatingHelp" placeholder="Fitch Rating">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Order Number</label>
+					<input
+							type="number" th:field="*{orderNumber}" class="form-control" id="orderNumberInput"
+							aria-describedby="orderNumberHelp" placeholder="Order Number">
+					<p th:if="${#fields.hasErrors('orderNumber')}" class="label label-danger" th:errors="*{orderNumber}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<a class="btn btn-danger" href="/rating/list" role="button">Cancel</a>
+					<button type="submit" class="btn btn-primary">Add Rating</button>
+				</div>
+			</div>
 
 		</form>
 	</div>

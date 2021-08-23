@@ -38,7 +38,24 @@
 				</tr>
 			</thead>
 			<tbody>
-			<!-- TODO: Show all Rating to the table, the Action column will have Edit & Delete buttons -->
+			<tr th:if="${ratingDtoList.empty}">
+				<td colspan="6">No curve point yet</td>
+			</tr>
+			<tr th:each="ratingDto: ${ratingDtoList}">
+				<td><span th:text="${ratingDto.id}"> Id </span></td>
+				<td><span th:text="${ratingDto.moodysRating}"> MoodysRating </span></td>
+				<td><span th:text="${ratingDto.sandPRating}"> SandPRating </span></td>
+				<td><span th:text="${ratingDto.fitchRating}"> FitchRating </span></td>
+				<td><span th:text="${ratingDto.orderNumber}"> Order </span></td>
+				<td>
+					<a th:href="@{/rating/update/{id}(id=${ratingDto.id})}">
+						<button class="btn btn-info btn-sm">Edit</button>
+					</a>
+					<a th:href="@{/rating/delete/{id}(id=${ratingDto.id})}">
+						<button class="btn btn-danger btn-sm">Delete</button>
+					</a>
+				</td>
+			</tr>
 			</tbody>
 		</table>
 	</div>
