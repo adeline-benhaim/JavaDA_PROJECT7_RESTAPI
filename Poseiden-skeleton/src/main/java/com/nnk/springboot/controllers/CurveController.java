@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class CurveController {
@@ -18,14 +19,14 @@ public class CurveController {
     private CurvePointService curvePointService;
 
     @RequestMapping("/curvePoint/list")
-    public String home(Model model)
-    {
-        // TODO: find all Curve Point, add to model
+    public String home(Model model) {
+        List<CurvePointDto> curvePointDtoList = curvePointService.getAllCurvePoints();
+        model.addAttribute("curvePointDtoList", curvePointDtoList);
         return "curvePoint/list";
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(Model model) {
+    public String addCurvePointForm(Model model) {
         CurvePointDto curvePointDto = new CurvePointDto();
         model.addAttribute("curvePointDto", curvePointDto);
         return "curvePoint/add";

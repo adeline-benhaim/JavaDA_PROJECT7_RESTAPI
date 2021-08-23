@@ -3,6 +3,8 @@ package com.nnk.springboot.service;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Dto.CurvePointDto;
 
+import java.util.List;
+
 public interface CurvePointService {
 
     /**
@@ -12,4 +14,11 @@ public interface CurvePointService {
      * @return curve point saved
      */
     CurvePoint createCurvePoint(CurvePointDto curvePointDto);
+
+    /**
+     * Get all curve points
+     *
+     * @return a list of all curve points
+     */
+    List<CurvePointDto> getAllCurvePoints();
 }

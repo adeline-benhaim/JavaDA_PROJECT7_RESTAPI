@@ -31,6 +31,7 @@ public class MapperDto {
 
     public static CurvePointDto convertToCurvePointDto(CurvePoint curvePoint) {
         return CurvePointDto.builder()
+                .id(curvePoint.getId())
                 .curveId(curvePoint.getCurveId())
                 .term(curvePoint.getTerm())
                 .value(curvePoint.getValue())

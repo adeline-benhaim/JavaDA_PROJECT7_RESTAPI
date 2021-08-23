@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class CurvePointDto {
 
+    Integer id;
+
     @NotNull(message = "Curve Id must not be null")
     Integer curveId;
 
