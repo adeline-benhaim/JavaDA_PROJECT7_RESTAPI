@@ -38,4 +38,11 @@ public interface CurvePointService {
      * @return curve point updated
      */
     CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto);
+
+    /**
+     * Delete a curve point by id
+     *
+     * @param id ID of curve point to delete
+     */
+    void deleteCurvePoint(Integer id);
 }

@@ -82,4 +82,16 @@ public class CurvePointServiceImpl implements CurvePointService {
         logger.info("Curve point updated");
         return curvePointRepository.save(curvePointToUpdate);
     }
+
+    /**
+     * Delete a curve point by id
+     *
+     * @param id ID of curve point to delete
+     */
+    @Override
+    @Transactional
+    public void deleteCurvePoint(Integer id) {
+        logger.info("Delete curve point : " + id);
+        curvePointRepository.deleteById(id);
+    }
 }
