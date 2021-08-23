@@ -1,6 +1,5 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Dto.CurvePointDto;
 import com.nnk.springboot.service.CurvePointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +43,20 @@ public class CurveController {
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get CurvePoint by Id and to model then show to the form
+        CurvePointDto curvePointDtoToUpdate = curvePointService.getCurvePointById(id);
+        model.addAttribute("curvePointDtoToUpdate", curvePointDtoToUpdate);
         return "curvePoint/update";
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
+    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePointDto curvePointDto,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Curve and return Curve list
-        return "redirect:/curvePoint/list";
+        if (!result.hasErrors()) {
+            curvePointService.updateCurvePoint(id, curvePointDto);
+            return "redirect:/curvePoint/list";
+        }
+        model.addAttribute("curvePointDto", curvePointDto);
+        return "redirect:/curvePoint/update/{id}";
     }
 
     @GetMapping("/curvePoint/delete/{id}")

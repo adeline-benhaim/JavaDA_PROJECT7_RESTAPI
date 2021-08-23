@@ -21,4 +21,21 @@ public interface CurvePointService {
      * @return a list of all curve points
      */
     List<CurvePointDto> getAllCurvePoints();
+
+    /**
+     * Get a curve point
+     *
+     * @param id of the requested curve point
+     * @return curve point found by id
+     */
+    CurvePointDto getCurvePointById(Integer id);
+
+    /**
+     * Update a curve point
+     *
+     * @param id curve point id to update
+     * @param curvePointDto curve point to update
+     * @return curve point updated
+     */
+    CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto);
 }

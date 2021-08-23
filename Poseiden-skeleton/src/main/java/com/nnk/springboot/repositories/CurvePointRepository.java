@@ -16,4 +16,12 @@ public interface CurvePointRepository extends JpaRepository<CurvePoint, Integer>
      */
     List<CurvePoint> findAllByOrderByIdDesc();
 
+    /**
+     * Find a curve point
+     *
+     * @param id of the requested curve point
+     * @return curve point found by id
+     */
+    CurvePoint findCurvePointById(Integer id);
+
 }
