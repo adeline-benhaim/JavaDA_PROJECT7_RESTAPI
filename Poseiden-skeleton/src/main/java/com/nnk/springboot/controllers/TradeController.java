@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class TradeController {
@@ -18,9 +19,9 @@ public class TradeController {
     TradeService tradeService;
 
     @RequestMapping("/trade/list")
-    public String home(Model model)
-    {
-        // TODO: find all Trade, add to model
+    public String home(Model model) {
+        List<TradeDto> tradeDtoList = tradeService.getAllTrades();
+        model.addAttribute("tradeDtoList", tradeDtoList);
         return "trade/list";
     }
 

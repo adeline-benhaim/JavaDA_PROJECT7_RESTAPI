@@ -1,5 +1,6 @@
 package com.nnk.springboot.service;
 
+import com.nnk.springboot.Mapper.MapperDto;
 import com.nnk.springboot.domain.Dto.TradeDto;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
@@ -7,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TradeServiceImpl implements TradeService {
@@ -32,5 +36,17 @@ public class TradeServiceImpl implements TradeService {
         return tradeRepository.save(newTrade);
     }
 
+    /**
+     * Get all trades
+     *
+     * @return a list of all trades
+     */
+    @Override
+    public List<TradeDto> getAllTrades() {
+        logger.info("Get all trade");
+        List<Trade> tradeList = tradeRepository.findAllByOrderByTradeIdDesc();
+        return tradeList.stream().map(MapperDto::convertToTradeDto)
+                .collect(Collectors.toList());
+    }
 
 }
