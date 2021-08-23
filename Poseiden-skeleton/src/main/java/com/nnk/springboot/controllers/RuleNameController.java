@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class RuleNameController {
@@ -18,9 +19,9 @@ public class RuleNameController {
     private RuleNameService ruleNameService;
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model)
-    {
-        // TODO: find all RuleName, add to model
+    public String home(Model model) {
+        List<RuleNameDto> ruleNameDtoList = ruleNameService.getAllRuleNames();
+        model.addAttribute("ruleNameDtoList", ruleNameDtoList);
         return "ruleName/list";
     }
 
