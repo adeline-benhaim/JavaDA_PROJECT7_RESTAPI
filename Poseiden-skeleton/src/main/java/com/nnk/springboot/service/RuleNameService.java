@@ -38,4 +38,11 @@ public interface RuleNameService {
      * @return rule updated
      */
     RuleName updateRuleName(Integer id, RuleNameDto ruleNameDto);
+
+    /**
+     * Delete a rule by id
+     *
+     * @param id ID of rule to delete
+     */
+    void deleteRuleName(Integer id);
 }

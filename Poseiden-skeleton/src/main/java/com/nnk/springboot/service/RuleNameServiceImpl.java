@@ -88,4 +88,16 @@ public class RuleNameServiceImpl implements RuleNameService {
         return ruleNameRepository.save(ruleNameToUpdate);
     }
 
+    /**
+     * Delete a rule by id
+     *
+     * @param id ID of rule to delete
+     */
+    @Override
+    @Transactional
+    public void deleteRuleName(Integer id) {
+        logger.info("Delete rule : " + id);
+        ruleNameRepository.deleteById(id);
+    }
+
 }
