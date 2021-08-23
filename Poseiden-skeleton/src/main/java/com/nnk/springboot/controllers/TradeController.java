@@ -1,19 +1,21 @@
 package com.nnk.springboot.controllers;
 
+import com.nnk.springboot.domain.Dto.TradeDto;
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.service.TradeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Controller
 public class TradeController {
-    // TODO: Inject Trade service
+
+    @Autowired
+    TradeService tradeService;
 
     @RequestMapping("/trade/list")
     public String home(Model model)
@@ -23,13 +25,19 @@ public class TradeController {
     }
 
     @GetMapping("/trade/add")
-    public String addUser(Trade bid) {
+    public String addUser(Model model) {
+        TradeDto tradeDto = new TradeDto();
+        model.addAttribute("tradeDto", tradeDto);
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
-    public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
+    public String validate(@Valid @ModelAttribute TradeDto tradeDto, BindingResult result, Model model) {
+        if (!result.hasErrors()) {
+            tradeService.createTrade(tradeDto);
+            return "redirect:/trade/list";
+        }
+        model.addAttribute("tradeDto", tradeDto);
         return "trade/add";
     }
 
