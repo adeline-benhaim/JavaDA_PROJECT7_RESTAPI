@@ -1,9 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Dto.RatingDto;
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.service.RatingService;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,15 +44,20 @@ public class RatingController {
 
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Rating by Id and to model then show to the form
+        RatingDto ratingDtoToUpdate = ratingService.getRatingById(id);
+        model.addAttribute("ratingDtoToUpdate", ratingDtoToUpdate);
         return "rating/update";
     }
 
     @PostMapping("/rating/update/{id}")
-    public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
+    public String updateRating(@PathVariable("id") Integer id, @Valid RatingDto ratingDto,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
-        return "redirect:/rating/list";
+        if (!result.hasErrors()) {
+            ratingService.updateRating(id, ratingDto);
+            return "redirect:/rating/list";
+        }
+        model.addAttribute("ratingDto", ratingDto);
+        return "redirect:/rating/update/{id}";
     }
 
     @GetMapping("/rating/delete/{id}")
