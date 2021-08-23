@@ -5,7 +5,9 @@ import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Dto.BidListDto;
 import com.nnk.springboot.domain.Dto.CurvePointDto;
 import com.nnk.springboot.domain.Dto.RatingDto;
+import com.nnk.springboot.domain.Dto.RuleNameDto;
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.domain.RuleName;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +40,18 @@ public class MapperDto {
                 .sandPRating(rating.getSandPRating())
                 .fitchRating(rating.getFitchRating())
                 .orderNumber(rating.getOrderNumber())
+                .build();
+    }
+
+    public static RuleNameDto convertToRuleNameDto(RuleName ruleName) {
+        return RuleNameDto.builder()
+                .id(ruleName.getId())
+                .name(ruleName.getName())
+                .description(ruleName.getDescription())
+                .json(ruleName.getJson())
+                .template(ruleName.getTemplate())
+                .sqlStr(ruleName.getSqlStr())
+                .sqlPart(ruleName.getSqlPart())
                 .build();
     }
 }

@@ -39,7 +39,7 @@
 			</thead>
 			<tbody>
 			<tr th:if="${ratingDtoList.empty}">
-				<td colspan="6">No curve point yet</td>
+				<td colspan="6">No rating yet</td>
 			</tr>
 			<tr th:each="ratingDto: ${ratingDtoList}">
 				<td><span th:text="${ratingDto.id}"> Id </span></td>
