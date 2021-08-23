@@ -44,15 +44,20 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get RuleName by Id and to model then show to the form
+        RuleNameDto ruleNameDtoToUpdate = ruleNameService.getRuleNameById(id);
+        model.addAttribute("ruleNameDtoToUpdate", ruleNameDtoToUpdate);
         return "ruleName/update";
     }
 
     @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
+    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleNameDto ruleNameDto,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
-        return "redirect:/ruleName/list";
+        if (!result.hasErrors()) {
+            ruleNameService.updateRuleName(id, ruleNameDto);
+            return "redirect:/ruleName/list";
+        }
+        model.addAttribute("ruleNameDto", ruleNameDto);
+        return "redirect:/ruleName/update/{id}";
     }
 
     @GetMapping("/ruleName/delete/{id}")

@@ -15,4 +15,12 @@ public interface RuleNameRepository extends JpaRepository<RuleName, Integer> {
      * @return a list of all rules sorted by id desc
      */
     List<RuleName> findAllByOrderByIdDesc();
+
+    /**
+     * Find a rule
+     *
+     * @param id of the requested rule
+     * @return rule found by id
+     */
+    RuleName findRuleNameById(Integer id);
 }
