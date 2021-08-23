@@ -1,7 +1,9 @@
 package com.nnk.springboot.Mapper;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Dto.BidListDto;
+import com.nnk.springboot.domain.Dto.CurvePointDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +26,14 @@ public class MapperDto {
                 .account(bidListDto.getAccount())
                 .type(bidListDto.getType())
                 .bidQuantity(bidListDto.getBidQuantity())
+                .build();
+    }
+
+    public static CurvePointDto convertToCurvePointDto(CurvePoint curvePoint) {
+        return CurvePointDto.builder()
+                .curveId(curvePoint.getCurveId())
+                .term(curvePoint.getTerm())
+                .value(curvePoint.getValue())
                 .build();
     }
 }
