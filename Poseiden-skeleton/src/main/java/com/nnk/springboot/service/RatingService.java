@@ -3,6 +3,8 @@ package com.nnk.springboot.service;
 import com.nnk.springboot.domain.Dto.RatingDto;
 import com.nnk.springboot.domain.Rating;
 
+import java.util.List;
+
 public interface RatingService {
 
     /**
@@ -12,4 +14,6 @@ public interface RatingService {
      * @return rating saved
      */
    Rating createRating(RatingDto ratingDto);
+
+    List<RatingDto> getAllRatings();
 }
