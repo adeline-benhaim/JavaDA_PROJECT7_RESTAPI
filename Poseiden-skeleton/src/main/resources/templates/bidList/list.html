@@ -40,16 +40,16 @@
 			<tr th:if="${bidList.empty}">
 				<td colspan="5">No bid yet</td>
 			</tr>
-			<tr th:each="bidList: ${bidList}">
-				<td><span th:text="${bidList.BidListId}"> Id </span></td>
-				<td><span th:text="${bidList.account}"> Account </span></td>
-				<td><span th:text="${bidList.type}"> Type </span></td>
-				<td><span th:text="${bidList.bidQuantity}"> Bid Quantity </span></td>
+			<tr th:each="bid: ${bidList}">
+				<td><span th:text="${bid.BidListId}"> Id </span></td>
+				<td><span th:text="${bid.account}"> Account </span></td>
+				<td><span th:text="${bid.type}"> Type </span></td>
+				<td><span th:text="${bid.bidQuantity}"> Bid Quantity </span></td>
 				<td>
-					<a th:href="@{/bidList/update/{id}(id=${bidList.BidListId})}">
+					<a th:href="@{/bidList/update/{id}(id=${bid.BidListId})}">
 						<button class="btn btn-info btn-sm">Edit</button>
 					</a>
-					<a th:href="@{/bidList/delete/{id}(id=${bidList.BidListId})}">
+					<a th:href="@{/bidList/delete/{id}(id=${bid.BidListId})}">
 						<button class="btn btn-danger btn-sm">Delete</button>
 					</a>
 				</td>

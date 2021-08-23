@@ -29,7 +29,7 @@ public class BidTests {
     public void getAllBidsTest() {
 
         //GIVEN
-        List<BidList> bidList = bidListRepository.findAll();
+        List<BidList> bidList = bidListRepository.findAllByOrderByBidListIdDesc();
 
         //WHEN
         List<BidListDto> bidListDto = bidListService.getAllBidList();

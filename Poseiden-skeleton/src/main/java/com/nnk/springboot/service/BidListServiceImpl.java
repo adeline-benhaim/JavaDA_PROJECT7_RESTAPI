@@ -45,7 +45,7 @@ public class BidListServiceImpl implements BidListService {
     @Override
     public List<BidListDto> getAllBidList() {
         logger.info("Get all bidList");
-        List<BidList> bidList = bidListRepository.findAll();
+        List<BidList> bidList = bidListRepository.findAllByOrderByBidListIdDesc();
         return bidList
                 .stream().map(MapperDto::convertToBidListDto)
                 .collect(Collectors.toList());

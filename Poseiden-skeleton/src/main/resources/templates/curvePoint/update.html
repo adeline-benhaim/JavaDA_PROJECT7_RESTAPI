@@ -4,7 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		  integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
@@ -13,10 +14,48 @@
 	</div>
 
 	<div class="row">
-		<form action="#" th:action="@{/curvePoint/update/{id}(id=${curvePoint.id})}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of CurvePoint, there are 2 buttons: Update data and Cancel to the Curve Point
-			 -->
+		<form th:action="@{/curvePoint/update/{id}(id=${curvePointDtoToUpdate.id})}" th:object="${curvePointDtoToUpdate}" method="post" class="form-horizontal" style="width: 100%">
+
+			<div class="form-group">
+				<input
+						type="hidden" th:field="*{id}" class="form-control">
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Curve Id</label>
+					<input
+							type="number" th:field="*{curveId}" class="form-control" id="curveIdInput"
+							aria-describedby="curveIdHelp" placeholder="Curve Id"
+							th:value="${curvePointDtoToUpdate.curveId}" required>
+					<p th:if="${#fields.hasErrors('curveId')}" class="label label-danger" th:errors="*{curveId}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Term</label>
+					<input
+							type="number" step="0.01" th:field="*{term}" class="form-control" id="termCurvePointInput"
+							aria-describedby="termCurvePointHelp" placeholder="Term" th:value="${curvePointDtoToUpdate.term}" required>
+					<p th:if="${#fields.hasErrors('term')}" class="label label-danger" th:errors="*{term}" ></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Value</label>
+					<input
+							type="number" step="0.01" th:field="*{value}" class="form-control" id="valueCurvePointInput"
+							aria-describedby="valueCurvePointHelp" th:value="${curvePointDtoToUpdate.value}" required>
+				</div>
+			</div>
+
+			<div class="row">
+				<a class="btn btn-danger" href="/curvePoint/list" role="button">Cancel</a>
+				<button type="submit" class="btn btn-primary">Update curvePoint</button>
+			</div>
+
 		</form>
 	</div>
 
