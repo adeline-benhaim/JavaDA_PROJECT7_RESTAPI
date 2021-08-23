@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class RuleName {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     String name;
@@ -32,6 +32,4 @@ public class RuleName {
 
     @Column(name = "sql_part")
     String sqlPart;
-
-
 }
