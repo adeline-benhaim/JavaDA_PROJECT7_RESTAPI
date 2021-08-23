@@ -2,7 +2,7 @@ package com.nnk.springboot.domain.Dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CurvePointDto {
 
-    @NotBlank(message = "Curve Id must not be null")
+    @NotNull(message = "Curve Id must not be null")
     Integer curveId;
 
     Double term;

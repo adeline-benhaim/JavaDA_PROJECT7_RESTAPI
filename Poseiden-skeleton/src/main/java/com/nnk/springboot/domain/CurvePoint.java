@@ -4,7 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 
@@ -22,7 +22,7 @@ public class CurvePoint {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
-    @NotBlank(message = "Curve Id must not be null")
+    @NotNull(message = "Curve Id must not be null")
     @Column(name = "curve_id")
     Integer curveId;
 

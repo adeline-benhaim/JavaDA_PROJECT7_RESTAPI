@@ -1,19 +1,21 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.domain.Dto.CurvePointDto;
+import com.nnk.springboot.service.CurvePointService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Controller
 public class CurveController {
-    // TODO: Inject Curve Point service
+
+    @Autowired
+    private CurvePointService curvePointService;
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model)
@@ -23,13 +25,19 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(CurvePoint bid) {
+    public String addBidForm(Model model) {
+        CurvePointDto curvePointDto = new CurvePointDto();
+        model.addAttribute("curvePointDto", curvePointDto);
         return "curvePoint/add";
     }
 
     @PostMapping("/curvePoint/validate")
-    public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Curve list
+    public String validate(@Valid @ModelAttribute CurvePointDto curvePointDto, BindingResult result, Model model) {
+        if (!result.hasErrors()) {
+            curvePointService.createCurvePoint(curvePointDto);
+            return "redirect:/curvePoint/list";
+        }
+        model.addAttribute("curvePointDto", curvePointDto);
         return "curvePoint/add";
     }
 
