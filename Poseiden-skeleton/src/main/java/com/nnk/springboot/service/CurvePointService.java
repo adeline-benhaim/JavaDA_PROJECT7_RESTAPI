@@ -2,6 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Dto.CurvePointDto;
+import javassist.NotFoundException;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface CurvePointService {
      * @param id of the requested curve point
      * @return curve point found by id
      */
-    CurvePointDto getCurvePointById(Integer id);
+    CurvePointDto getCurvePointById(Integer id) throws NotFoundException;
 
     /**
      * Update a curve point
@@ -37,7 +38,7 @@ public interface CurvePointService {
      * @param curvePointDto curve point to update
      * @return curve point updated
      */
-    CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto);
+    CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto) throws NotFoundException;
 
     /**
      * Delete a curve point by id

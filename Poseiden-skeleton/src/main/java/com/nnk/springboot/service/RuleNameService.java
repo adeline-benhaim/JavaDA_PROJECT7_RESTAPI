@@ -2,6 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.Dto.RuleNameDto;
 import com.nnk.springboot.domain.RuleName;
+import javassist.NotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public interface RuleNameService {
      * @param id of the requested rule
      * @return rule found by id
      */
-    RuleNameDto getRuleNameById(Integer id);
+    RuleNameDto getRuleNameById(Integer id) throws NotFoundException;
 
     /**
      * Update a rule
@@ -37,7 +38,7 @@ public interface RuleNameService {
      * @param ruleNameDto rule information to update
      * @return rule updated
      */
-    RuleName updateRuleName(Integer id, RuleNameDto ruleNameDto);
+    RuleName updateRuleName(Integer id, RuleNameDto ruleNameDto) throws NotFoundException;
 
     /**
      * Delete a rule by id

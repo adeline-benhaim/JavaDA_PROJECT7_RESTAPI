@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Dto.CurvePointDto;
 import com.nnk.springboot.service.CurvePointService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,20 +44,28 @@ public class CurveController {
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        CurvePointDto curvePointDtoToUpdate = curvePointService.getCurvePointById(id);
-        model.addAttribute("curvePointDtoToUpdate", curvePointDtoToUpdate);
-        return "curvePoint/update";
+        try {
+            CurvePointDto curvePointDtoToUpdate = curvePointService.getCurvePointById(id);
+            model.addAttribute("curvePointDto", curvePointDtoToUpdate);
+            return "curvePoint/update";
+        } catch (NotFoundException e) {
+            return "notFound";
+        }
     }
 
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePointDto curvePointDto,
-                             BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            curvePointService.updateCurvePoint(id, curvePointDto);
-            return "redirect:/curvePoint/list";
+                            BindingResult result, Model model) {
+        try {
+            if (!result.hasErrors()) {
+                curvePointService.updateCurvePoint(id, curvePointDto);
+                return "redirect:/curvePoint/list";
+            }
+            model.addAttribute("curvePointDto", curvePointDto);
+            return "curvePoint/update";
+        } catch (NotFoundException e) {
+            return "notFound";
         }
-        model.addAttribute("curvePointDto", curvePointDto);
-        return "redirect:/curvePoint/update/{id}";
     }
 
     @GetMapping("/curvePoint/delete/{id}")

@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Dto.BidListDto;
 import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.service.BidListServiceImpl;
+import javassist.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class BidTests {
 
     @Test
     @DisplayName("Get a bid by id")
-    public void getBidByIdTest() {
+    public void getBidByIdTest() throws NotFoundException {
 
         //GIVEN
         BidList bidList1 = bidListRepository.findBidListByBidListId(1);
@@ -57,7 +58,7 @@ public class BidTests {
 
     @Test
     @DisplayName("Update a new bid")
-    public void updateABidTest() {
+    public void updateABidTest() throws NotFoundException {
 
         //GIVEN
         BidListDto bidListDtoUpdated = BidListDto.builder()

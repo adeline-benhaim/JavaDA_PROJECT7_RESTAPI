@@ -42,4 +42,11 @@ public interface TradeService {
      * @throws NotFoundException if trade id doesn't exist
      */
     Trade updateTrade(Integer id, TradeDto tradeDto) throws NotFoundException;
+
+    /**
+     * Delete a trade by id
+     *
+     * @param id ID of trade to delete
+     */
+    void deleteTrade(Integer id);
 }

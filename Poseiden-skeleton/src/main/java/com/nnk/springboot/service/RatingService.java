@@ -2,6 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.Dto.RatingDto;
 import com.nnk.springboot.domain.Rating;
+import javassist.NotFoundException;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface RatingService {
      * @param id of the requested rating
      * @return rating found by id
      */
-    RatingDto getRatingById(Integer id);
+    RatingDto getRatingById(Integer id) throws NotFoundException;
 
     /**
      * Update a rating
@@ -37,7 +38,7 @@ public interface RatingService {
      * @param ratingDto rating's information to update
      * @return rating updated
      */
-    Rating updateRating(Integer id, RatingDto ratingDto);
+    Rating updateRating(Integer id, RatingDto ratingDto) throws NotFoundException;
 
     /**
      * Delete a rating by id

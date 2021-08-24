@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,7 +62,7 @@ public class TradeServiceImpl implements TradeService {
     public TradeDto getTradeById(Integer id) throws NotFoundException {
         logger.info("Get a trade by ID");
         if (!tradeRepository.existsById(id)) {
-            logger.error("Trade id : " + id + " doesn't exist");
+            logger.error("Unable to get trade by id : " + id + " because doesn't exist");
             throw new NotFoundException("Trade id doesn't exist");
         }
         Trade trade = tradeRepository.findTradeByTradeId(id);
@@ -83,7 +82,7 @@ public class TradeServiceImpl implements TradeService {
     public Trade updateTrade(Integer id, TradeDto tradeDto) throws NotFoundException {
         logger.info("Get a trade by ID");
         if (!tradeRepository.existsById(id)) {
-            logger.error("Trade id : " + id + " doesn't exist");
+            logger.error("Unable to get trade by id : " + id + " because doesn't exist");
             throw new NotFoundException("Trade id doesn't exist");
         }
         Trade tradeToUpdate = tradeRepository.findTradeByTradeId(id);
@@ -94,4 +93,15 @@ public class TradeServiceImpl implements TradeService {
         return tradeRepository.save(tradeToUpdate);
     }
 
+    /**
+     * Delete a trade by id
+     *
+     * @param id ID of trade to delete
+     */
+    @Override
+    @Transactional
+    public void deleteTrade(Integer id) {
+        logger.info("Delete trade : " + id);
+        tradeRepository.deleteById(id);
+    }
 }

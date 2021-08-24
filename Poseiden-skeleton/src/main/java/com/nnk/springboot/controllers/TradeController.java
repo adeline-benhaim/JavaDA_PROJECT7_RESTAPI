@@ -1,7 +1,6 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Dto.TradeDto;
-import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.service.TradeService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,26 +43,33 @@ public class TradeController {
     }
 
     @GetMapping("/trade/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) throws NotFoundException {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        try {
             TradeDto tradeDtoToUpdate = tradeService.getTradeById(id);
-            model.addAttribute("tradeDtoToUpdate", tradeDtoToUpdate);
+            model.addAttribute("tradeDto", tradeDtoToUpdate);
             return "trade/update";
+        } catch (NotFoundException e) {
+            return "notFound";
+        }
     }
 
     @PostMapping("/trade/update/{id}")
-    public String updateTrade(@PathVariable("id") Integer id, @Valid TradeDto tradeDto,
-                             BindingResult result, Model model) throws NotFoundException {
-        if (!result.hasErrors()) {
-            tradeService.updateTrade(id, tradeDto);
-            return "redirect:/trade/list";
+    public String updateTrade(@PathVariable("id") Integer id, @Valid TradeDto tradeDto, BindingResult result, Model model) {
+        try {
+            if (!result.hasErrors()) {
+                tradeService.updateTrade(id, tradeDto);
+                return "redirect:/trade/list";
+            }
+            model.addAttribute("tradeDto", tradeDto);
+            return "trade/update";
+        } catch (NotFoundException e) {
+            return "notFound";
         }
-        model.addAttribute("tradeDto", tradeDto);
-        return "redirect:/trade/update/{id}";
     }
 
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
+        tradeService.deleteTrade(id);
         return "redirect:/trade/list";
     }
 }

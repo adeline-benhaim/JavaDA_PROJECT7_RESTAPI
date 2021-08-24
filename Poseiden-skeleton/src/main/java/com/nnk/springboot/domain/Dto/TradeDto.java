@@ -14,12 +14,12 @@ public class TradeDto {
 
     Integer tradeId;
 
-    @Size(max = 30, message = "30 characters maximum allowed")
     @NotBlank(message = "Account is mandatory")
+    @Size(max = 30, message = "30 characters maximum allowed")
     String account;
 
-    @Size(max = 30, message = "30 characters maximum allowed")
     @NotBlank(message = "Type is mandatory")
+    @Size(max = 30, message = "30 characters maximum allowed")
     String type;
 
     Double buyQuantity;
