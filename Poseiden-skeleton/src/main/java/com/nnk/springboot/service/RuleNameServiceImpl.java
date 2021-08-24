@@ -4,6 +4,7 @@ import com.nnk.springboot.Mapper.MapperDto;
 import com.nnk.springboot.domain.Dto.RuleNameDto;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +61,12 @@ public class RuleNameServiceImpl implements RuleNameService {
      * @return rule found by id
      */
     @Override
-    public RuleNameDto getRuleNameById(Integer id) {
+    public RuleNameDto getRuleNameById(Integer id) throws NotFoundException {
         logger.info("Get a rule by ID");
+        if (!ruleNameRepository.existsById(id)) {
+            logger.error("Unable to get rule by id : " + id + " because doesn't exist");
+            throw new NotFoundException("Rule id doesn't exist");
+        }
         RuleName ruleName = ruleNameRepository.findRuleNameById(id);
         return MapperDto.convertToRuleNameDto(ruleName);
     }
@@ -75,8 +80,12 @@ public class RuleNameServiceImpl implements RuleNameService {
      */
     @Override
     @Transactional
-    public RuleName updateRuleName(Integer id, RuleNameDto ruleNameDto) {
+    public RuleName updateRuleName(Integer id, RuleNameDto ruleNameDto) throws NotFoundException {
         logger.info("Get rule by id");
+        if (!ruleNameRepository.existsById(id)) {
+            logger.error("Unable to get rule by id : " + id + " because doesn't exist");
+            throw new NotFoundException("Rule id doesn't exist");
+        }
         RuleName ruleNameToUpdate = ruleNameRepository.findRuleNameById(id);
         ruleNameToUpdate.setName(ruleNameDto.getName());
         ruleNameToUpdate.setDescription(ruleNameDto.getDescription());

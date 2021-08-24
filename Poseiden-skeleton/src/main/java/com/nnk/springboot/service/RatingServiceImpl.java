@@ -4,6 +4,7 @@ import com.nnk.springboot.Mapper.MapperDto;
 import com.nnk.springboot.domain.Dto.RatingDto;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,12 @@ public class RatingServiceImpl implements RatingService {
      * @return rating found by id
      */
     @Override
-    public  RatingDto getRatingById(Integer id) {
+    public  RatingDto getRatingById(Integer id) throws NotFoundException {
         logger.info("Get a rating by ID");
+        if (!ratingRepository.existsById(id)){
+            logger.error("Unable to get rating by id : " + id + " because doesn't exist");
+            throw new NotFoundException("Rating id doesn't exist");
+        }
         Rating rating = ratingRepository.findRatingById(id);
         return MapperDto.convertToRatingDto(rating);
     }
@@ -72,8 +77,12 @@ public class RatingServiceImpl implements RatingService {
      */
     @Override
     @Transactional
-    public Rating updateRating(Integer id, RatingDto ratingDto) {
+    public Rating updateRating(Integer id, RatingDto ratingDto) throws NotFoundException {
         logger.info("Get a rating by ID");
+        if (!ratingRepository.existsById(id)){
+            logger.error("Unable to get rating by id : " + id + " because doesn't exist");
+            throw new NotFoundException("Rating id doesn't exist");
+        }
         Rating ratingToUpdate = ratingRepository.findRatingById(id);
         ratingToUpdate.setMoodysRating(ratingDto.getMoodysRating());
         ratingToUpdate.setSandPRating(ratingDto.getSandPRating());

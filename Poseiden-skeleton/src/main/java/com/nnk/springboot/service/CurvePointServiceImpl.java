@@ -4,6 +4,7 @@ import com.nnk.springboot.Mapper.MapperDto;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Dto.CurvePointDto;
 import com.nnk.springboot.repositories.CurvePointRepository;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,12 @@ public class CurvePointServiceImpl implements CurvePointService {
      * @return curve point found by id
      */
     @Override
-    public CurvePointDto getCurvePointById(Integer id) {
+    public CurvePointDto getCurvePointById(Integer id) throws NotFoundException {
         logger.info("Get a curvePoint by ID");
+        if (!curvePointRepository.existsById(id)) {
+            logger.error("Unable to get curvePoint by id : " + id + " because doesn't exist");
+            throw new NotFoundException("curvePoint id doesn't exist");
+        }
         CurvePoint curvePoint = curvePointRepository.findCurvePointById(id);
         return MapperDto.convertToCurvePointDto(curvePoint);
     }
@@ -73,8 +78,12 @@ public class CurvePointServiceImpl implements CurvePointService {
      */
     @Override
     @Transactional
-    public CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto) {
+    public CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto) throws NotFoundException {
         logger.info("Get curve point by id");
+        if (!curvePointRepository.existsById(id)) {
+            logger.error("Unable to get curvePoint by id : " + id + " because doesn't exist");
+            throw new NotFoundException("curvePoint id doesn't exist");
+        }
         CurvePoint curvePointToUpdate = curvePointRepository.findCurvePointById(id);
         curvePointToUpdate.setCurveId(curvePointDto.getCurveId());
         curvePointToUpdate.setTerm(curvePointDto.getTerm());

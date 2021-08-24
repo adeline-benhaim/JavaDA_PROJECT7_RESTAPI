@@ -4,6 +4,7 @@ import com.nnk.springboot.Mapper.MapperDto;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Dto.BidListDto;
 import com.nnk.springboot.repositories.BidListRepository;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,12 @@ public class BidListServiceImpl implements BidListService {
      * @return bid found by id
      */
     @Override
-    public BidListDto getBidListById(Integer id) {
+    public BidListDto getBidListById(Integer id) throws NotFoundException {
         logger.info("Get a bidList by ID");
+        if (!bidListRepository.existsById(id)) {
+            logger.error("Unable to get bid by id : " + id + " because doesn't exist");
+            throw new NotFoundException("Bid id doesn't exist");
+        }
         BidList bidList = bidListRepository.findBidListByBidListId(id);
         return MapperDto.convertToBidListDto(bidList);
     }
@@ -73,8 +78,12 @@ public class BidListServiceImpl implements BidListService {
      */
     @Override
     @Transactional
-    public BidList updateBidList(Integer id, BidListDto bidListDto) {
+    public BidList updateBidList(Integer id, BidListDto bidListDto) throws NotFoundException {
         logger.info("Get bidList by id");
+        if (!bidListRepository.existsById(id)) {
+            logger.error("Unable to get bid by id : " + id + " because doesn't exist");
+            throw new NotFoundException("Bid id doesn't exist");
+        }
         BidList bidListToUpdate = bidListRepository.findBidListByBidListId(id);
         bidListToUpdate.setAccount(bidListDto.getAccount());
         bidListToUpdate.setType(bidListDto.getType());

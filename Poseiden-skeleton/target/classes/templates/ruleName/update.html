@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="row">
-		<form th:action="@{/ruleName/update/{id}(id=${ruleNameDtoToUpdate.id})}" th:object="${ruleNameDtoToUpdate}" method="post" class="form-horizontal" style="width: 100%">
+		<form th:action="@{/ruleName/update/{id}(id=${ruleNameDto.id})}" th:object="${ruleNameDto}" method="post" class="form-horizontal" style="width: 100%">
 
 			<div class="form-group">
 				<input
@@ -28,7 +28,7 @@
 					<input
 							type="text" th:field="*{name}" class="form-control" id="nameInput"
 							aria-describedby="nameHelp" placeholder="Rule Name"
-							th:value="${ruleNameDtoToUpdate.name}">
+							th:value="${ruleNameDto.name}">
 					<p th:if="${#fields.hasErrors('name')}" class="label label-danger" th:errors="*{name}"></p>
 				</div>
 			</div>
@@ -39,7 +39,7 @@
 					<input
 							type="text" th:field="*{description}" class="form-control" id="descriptionInput"
 							aria-describedby="descriptionHelp" placeholder="Rule Description"
-							th:value="${ruleNameDtoToUpdate.description}">
+							th:value="${ruleNameDto.description}">
 					<p th:if="${#fields.hasErrors('description')}" class="label label-danger" th:errors="*{description}"></p>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 					<input
 							type="text" th:field="*{json}" class="form-control" id="jsonInput"
 							aria-describedby="jsonHelp" placeholder="Rule Json"
-							th:value="${ruleNameDtoToUpdate.json}">
+							th:value="${ruleNameDto.json}">
 					<p th:if="${#fields.hasErrors('json')}" class="label label-danger" th:errors="*{json}"></p>
 				</div>
 			</div>
@@ -61,7 +61,7 @@
 					<input
 							type="text" th:field="*{template}" class="form-control" id="templateInput"
 							aria-describedby="templateHelp" placeholder="Rule Template"
-							th:value="${ruleNameDtoToUpdate.template}">
+							th:value="${ruleNameDto.template}">
 					<p th:if="${#fields.hasErrors('template')}" class="label label-danger" th:errors="*{template}"></p>
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 					<input
 							type="text" th:field="*{sqlStr}" class="form-control" id="sqlStrInput"
 							aria-describedby="sqlStrHelp" placeholder="SQL Str"
-							th:value="${ruleNameDtoToUpdate.sqlStr}">
+							th:value="${ruleNameDto.sqlStr}">
 					<p th:if="${#fields.hasErrors('sqlStr')}" class="label label-danger" th:errors="*{sqlStr}"></p>
 				</div>
 			</div>
@@ -83,7 +83,7 @@
 					<input
 							type="text" th:field="*{sqlPart}" class="form-control" id="sqlPartInput"
 							aria-describedby="sqlPartHelp" placeholder="SQL Part"
-							th:value="${ruleNameDtoToUpdate.sqlPart}">
+							th:value="${ruleNameDto.sqlPart}">
 					<p th:if="${#fields.hasErrors('sqlPart')}" class="label label-danger" th:errors="*{sqlPart}"></p>
 				</div>
 			</div>

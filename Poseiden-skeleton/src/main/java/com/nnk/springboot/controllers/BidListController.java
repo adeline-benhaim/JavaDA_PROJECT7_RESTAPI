@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Dto.BidListDto;
 import com.nnk.springboot.service.BidListService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,19 +45,27 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        BidListDto bidListToUpdate = bidListService.getBidListById(id);
-        model.addAttribute("bidListDto", bidListToUpdate);
-        return "bidList/update";
+        try {
+            BidListDto bidListToUpdate = bidListService.getBidListById(id);
+            model.addAttribute("bidListDto", bidListToUpdate);
+            return "bidList/update";
+        } catch (NotFoundException e) {
+            return "notFound";
+        }
     }
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidListDto bidListDto, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            bidListService.updateBidList(id, bidListDto);
-            return "redirect:/bidList/list";
+        try {
+            if (!result.hasErrors()) {
+                bidListService.updateBidList(id, bidListDto);
+                return "redirect:/bidList/list";
+            }
+            model.addAttribute("bidListDto", bidListDto);
+            return "bidList/update";
+        } catch (NotFoundException e) {
+            return "notFound";
         }
-        model.addAttribute("bidListDto", bidListDto);
-        return "/bidList/update/{id}";
     }
 
     @GetMapping("/bidList/delete/{id}")

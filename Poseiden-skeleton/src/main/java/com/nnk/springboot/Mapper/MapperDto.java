@@ -1,13 +1,7 @@
 package com.nnk.springboot.Mapper;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.domain.Dto.BidListDto;
-import com.nnk.springboot.domain.Dto.CurvePointDto;
-import com.nnk.springboot.domain.Dto.RatingDto;
-import com.nnk.springboot.domain.Dto.RuleNameDto;
-import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.domain.*;
+import com.nnk.springboot.domain.Dto.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -52,6 +46,15 @@ public class MapperDto {
                 .template(ruleName.getTemplate())
                 .sqlStr(ruleName.getSqlStr())
                 .sqlPart(ruleName.getSqlPart())
+                .build();
+    }
+
+    public static TradeDto convertToTradeDto(Trade trade) {
+        return TradeDto.builder()
+                .tradeId(trade.getTradeId())
+                .account(trade.getAccount())
+                .type(trade.getType())
+                .buyQuantity(trade.getBuyQuantity())
                 .build();
     }
 }

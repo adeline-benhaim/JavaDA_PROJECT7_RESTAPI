@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="row">
-		<form th:action="@{/curvePoint/update/{id}(id=${curvePointDtoToUpdate.id})}" th:object="${curvePointDtoToUpdate}" method="post" class="form-horizontal" style="width: 100%">
+		<form th:action="@{/curvePoint/update/{id}(id=${curvePointDto.id})}" th:object="${curvePointDto}" method="post" class="form-horizontal" style="width: 100%">
 
 			<div class="form-group">
 				<input
@@ -27,7 +27,7 @@
 					<input
 							type="number" th:field="*{curveId}" class="form-control" id="curveIdInput"
 							aria-describedby="curveIdHelp" placeholder="Curve Id"
-							th:value="${curvePointDtoToUpdate.curveId}" required>
+							th:value="${curvePointDto.curveId}">
 					<p th:if="${#fields.hasErrors('curveId')}" class="label label-danger" th:errors="*{curveId}"></p>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 					<label>Term</label>
 					<input
 							type="number" step="0.01" th:field="*{term}" class="form-control" id="termCurvePointInput"
-							aria-describedby="termCurvePointHelp" placeholder="Term" th:value="${curvePointDtoToUpdate.term}" required>
+							aria-describedby="termCurvePointHelp" placeholder="Term" th:value="${curvePointDto.term}">
 					<p th:if="${#fields.hasErrors('term')}" class="label label-danger" th:errors="*{term}" ></p>
 				</div>
 			</div>
@@ -47,7 +47,7 @@
 					<label>Value</label>
 					<input
 							type="number" step="0.01" th:field="*{value}" class="form-control" id="valueCurvePointInput"
-							aria-describedby="valueCurvePointHelp" th:value="${curvePointDtoToUpdate.value}" required>
+							aria-describedby="valueCurvePointHelp" th:value="${curvePointDto.value}">
 				</div>
 			</div>
 

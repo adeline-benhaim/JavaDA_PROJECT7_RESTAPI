@@ -1,8 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Dto.RuleNameDto;
-import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.service.RuleNameService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,20 +44,27 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        RuleNameDto ruleNameDtoToUpdate = ruleNameService.getRuleNameById(id);
-        model.addAttribute("ruleNameDtoToUpdate", ruleNameDtoToUpdate);
-        return "ruleName/update";
+        try {
+            RuleNameDto ruleNameDtoToUpdate = ruleNameService.getRuleNameById(id);
+            model.addAttribute("ruleNameDto", ruleNameDtoToUpdate);
+            return "ruleName/update";
+        } catch (NotFoundException e) {
+            return "notFound";
+        }
     }
 
     @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleNameDto ruleNameDto,
-                             BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            ruleNameService.updateRuleName(id, ruleNameDto);
-            return "redirect:/ruleName/list";
+    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleNameDto ruleNameDto, BindingResult result, Model model) {
+        try {
+            if (!result.hasErrors()) {
+                ruleNameService.updateRuleName(id, ruleNameDto);
+                return "redirect:/ruleName/list";
+            }
+            model.addAttribute("ruleNameDto", ruleNameDto);
+            return "ruleName/update";
+        } catch (NotFoundException e) {
+            return "notFound";
         }
-        model.addAttribute("ruleNameDto", ruleNameDto);
-        return "redirect:/ruleName/update/{id}";
     }
 
     @GetMapping("/ruleName/delete/{id}")
