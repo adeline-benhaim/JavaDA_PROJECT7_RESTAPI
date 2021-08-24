@@ -3,6 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Dto.TradeDto;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.service.TradeService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,16 +44,21 @@ public class TradeController {
     }
 
     @GetMapping("/trade/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Trade by Id and to model then show to the form
-        return "trade/update";
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) throws NotFoundException {
+            TradeDto tradeDtoToUpdate = tradeService.getTradeById(id);
+            model.addAttribute("tradeDtoToUpdate", tradeDtoToUpdate);
+            return "trade/update";
     }
 
     @PostMapping("/trade/update/{id}")
-    public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
-        return "redirect:/trade/list";
+    public String updateTrade(@PathVariable("id") Integer id, @Valid TradeDto tradeDto,
+                             BindingResult result, Model model) throws NotFoundException {
+        if (!result.hasErrors()) {
+            tradeService.updateTrade(id, tradeDto);
+            return "redirect:/trade/list";
+        }
+        model.addAttribute("tradeDto", tradeDto);
+        return "redirect:/trade/update/{id}";
     }
 
     @GetMapping("/trade/delete/{id}")
