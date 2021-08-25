@@ -14,6 +14,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -25,7 +26,8 @@ public class UserController {
 
     @RequestMapping("/user/list")
     public String home(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        List<UserDto> userDtoList = userService.getAllUsers();
+        model.addAttribute("users", userDtoList);
         return "user/list";
     }
 

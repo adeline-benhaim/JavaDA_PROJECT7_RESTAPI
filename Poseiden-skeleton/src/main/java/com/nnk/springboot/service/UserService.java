@@ -3,6 +3,8 @@ package com.nnk.springboot.service;
 import com.nnk.springboot.domain.Dto.UserDto;
 import com.nnk.springboot.domain.User;
 
+import java.util.List;
+
 public interface UserService {
 
     /**
@@ -12,4 +14,19 @@ public interface UserService {
      * @return user saved
      */
     User createUser(UserDto userDto);
+
+    /**
+     * Get all users
+     *
+     * @return a list of all users sorted by id desc
+     */
+    List<UserDto> getAllUsers();
+
+    /**
+     * Get a user by id
+     *
+     * @param id of the requested user
+     * @return user found by id
+     */
+    UserDto getUserById(Integer id);
 }

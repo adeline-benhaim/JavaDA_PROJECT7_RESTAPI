@@ -1,4 +1,4 @@
-package com.nnk.springboot.Mapper;
+package com.nnk.springboot.mapper;
 
 import com.nnk.springboot.domain.*;
 import com.nnk.springboot.domain.Dto.*;

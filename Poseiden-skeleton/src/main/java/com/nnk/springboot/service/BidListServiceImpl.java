@@ -1,6 +1,6 @@
 package com.nnk.springboot.service;
 
-import com.nnk.springboot.Mapper.MapperDto;
+import com.nnk.springboot.mapper.MapperDto;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Dto.BidListDto;
 import com.nnk.springboot.repositories.BidListRepository;

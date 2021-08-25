@@ -1,6 +1,6 @@
 package com.nnk.springboot.service;
 
-import com.nnk.springboot.Mapper.MapperDto;
+import com.nnk.springboot.mapper.MapperDto;
 import com.nnk.springboot.domain.Dto.RatingDto;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
