@@ -57,4 +57,14 @@ public class MapperDto {
                 .buyQuantity(trade.getBuyQuantity())
                 .build();
     }
+
+    public static UserDto convertToUserDto(User user) {
+        return UserDto.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .fullname(user.getFullname())
+                .role(user.getRole())
+                .build();
+    }
 }
