@@ -14,7 +14,6 @@
         <h2>Update Bid</h2>
     </div>
 
-    <div class="row">
         <form th:action="@{/bidList/update/{id}(id=${bidListDto.bidListId})}" th:object="${bidListDto}" method="post"
               class="form-horizontal" style="width: 100%">
             <div class="form-group">
@@ -60,6 +59,5 @@
         </form>
     </div>
 
-</div>
 </body>
 </html>

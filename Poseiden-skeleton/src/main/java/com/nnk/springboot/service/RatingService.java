@@ -2,7 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.Dto.RatingDto;
 import com.nnk.springboot.domain.Rating;
-import javassist.NotFoundException;
+import com.nnk.springboot.exception.NotFoundException;
 
 import java.util.List;
 

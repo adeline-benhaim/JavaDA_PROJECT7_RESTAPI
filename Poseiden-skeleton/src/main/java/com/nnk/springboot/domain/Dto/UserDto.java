@@ -1,5 +1,6 @@
 package com.nnk.springboot.domain.Dto;
 
+import com.nnk.springboot.config.ValidPassword;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -18,8 +19,9 @@ public class UserDto {
     @Size(max = 125, message = "125 characters maximum allowed")
     private String username;
 
-    @NotBlank(message = "Password is mandatory")
-    @Size(max = 125, message = "125 characters maximum allowed")
+//    @NotBlank(message = "Password is mandatory")
+    @ValidPassword
+//    @Size(min = 8, max = 125, message = "125 characters maximum allowed")
     private String password;
 
     @NotBlank(message = "FullName is mandatory")

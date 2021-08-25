@@ -14,7 +14,6 @@
 		<h2>Update Rating</h2>
 	</div>
 
-	<div class="row">
 		<form th:action="@{/rating/update/{id}(id=${ratingDtoToUpdate.id})}" th:object="${ratingDtoToUpdate}" method="post" class="form-horizontal" style="width: 100%">
 
 			<div class="form-group">
@@ -70,6 +69,5 @@
 		</form>
 	</div>
 
-</div>
 </body>
 </html>

@@ -2,7 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Dto.CurvePointDto;
 import com.nnk.springboot.service.CurvePointService;
-import javassist.NotFoundException;
+import com.nnk.springboot.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -2,8 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.Dto.TradeDto;
 import com.nnk.springboot.domain.Trade;
-import javassist.NotFoundException;
-import org.springframework.transaction.annotation.Transactional;
+import com.nnk.springboot.exception.NotFoundException;
 
 import java.util.List;
 

@@ -13,7 +13,6 @@
 		<h2>Update CurvePoint</h2>
 	</div>
 
-	<div class="row">
 		<form th:action="@{/curvePoint/update/{id}(id=${curvePointDto.id})}" th:object="${curvePointDto}" method="post" class="form-horizontal" style="width: 100%">
 
 			<div class="form-group">
@@ -59,6 +58,5 @@
 		</form>
 	</div>
 
-</div>
 </body>
 </html>

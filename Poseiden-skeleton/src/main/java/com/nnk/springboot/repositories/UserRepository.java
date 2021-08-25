@@ -8,4 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
 
+    /**
+     * Check if user already exist by username
+     * @param username the unique Id user
+     * @return true if user already exist
+     */
+    boolean existsByUsername(String username);
 }
