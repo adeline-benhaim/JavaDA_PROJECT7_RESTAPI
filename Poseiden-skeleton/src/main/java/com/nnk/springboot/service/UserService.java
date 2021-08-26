@@ -29,4 +29,13 @@ public interface UserService {
      * @return user found by id
      */
     UserDto getUserById(Integer id);
+
+    /**
+     * Update a user
+     *
+     * @param id user id to update
+     * @param userDto user information to update
+     * @return user updated
+     */
+    User updateUser(Integer id, UserDto userDto);
 }

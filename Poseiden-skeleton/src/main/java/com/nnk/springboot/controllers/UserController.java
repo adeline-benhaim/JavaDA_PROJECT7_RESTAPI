@@ -3,6 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Dto.UserDto;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.exception.AlreadyExistException;
+import com.nnk.springboot.exception.NotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class UserController {
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                 userDto.setPassword(encoder.encode(userDto.getPassword()));
                 userService.createUser(userDto);
-                model.addAttribute("users", userRepository.findAll());
+                model.addAttribute("users", userService.getAllUsers());
                 return "redirect:/user/list";
             } catch (AlreadyExistException e) {
                 ObjectError errorUsername = new ObjectError("username", e.getMessage());
@@ -59,25 +60,27 @@ public class UserController {
 
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        user.setPassword("");
-        model.addAttribute("user", user);
-        return "user/update";
+        try {
+            UserDto userDtoToUpdate = userService.getUserById(id);
+            model.addAttribute("userDto", userDtoToUpdate);
+            return "user/update";
+        } catch (NotFoundException e) {
+            return "notFound";
+        }
     }
 
     @PostMapping("/user/update/{id}")
-    public String updateUser(@PathVariable("id") Integer id, @Valid User user,
-                             BindingResult result, Model model) {
-        if (result.hasErrors()) {
+    public String updateUser(@PathVariable("id") Integer id, @Valid UserDto userDto, BindingResult result, Model model) {
+        try {
+            if (!result.hasErrors()) {
+                userService.updateUser(id, userDto);
+                return "redirect:/user/list";
+            }
+            model.addAttribute("userDto", userDto);
             return "user/update";
+        } catch (NotFoundException e) {
+            return "notFound";
         }
-
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
-        user.setId(id);
-        userRepository.save(user);
-        model.addAttribute("users", userRepository.findAll());
-        return "redirect:/user/list";
     }
 
     @GetMapping("/user/delete/{id}")

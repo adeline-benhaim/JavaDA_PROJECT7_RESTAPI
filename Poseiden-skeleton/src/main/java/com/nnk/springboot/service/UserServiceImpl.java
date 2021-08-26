@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -74,6 +74,30 @@ public class UserServiceImpl implements UserService {
         }
         User user = userRepository.getById(id);
         return MapperDto.convertToUserDto(user);
+    }
+
+    /**
+     * Update a user
+     *
+     * @param id user id to update
+     * @param userDto user information to update
+     * @return user updated
+     */
+    @Override
+    @Transactional
+    public User updateUser(Integer id, UserDto userDto) {
+        logger.info("Get a user by ID");
+        if (!userRepository.existsById(id)) {
+            logger.error("Unable to get user by id : " + id + " because doesn't exist");
+            throw new NotFoundException("User id doesn't exist");
+        }
+        User userToUpdate = userRepository.getById(id);
+        userToUpdate.setFullname(userDto.getFullname());
+        userToUpdate.setUsername(userDto.getUsername());
+        userToUpdate.setPassword(userDto.getPassword());
+        userToUpdate.setRole(userDto.getRole());
+        logger.info("User updated");
+        return userRepository.save(userToUpdate);
     }
 
 }
