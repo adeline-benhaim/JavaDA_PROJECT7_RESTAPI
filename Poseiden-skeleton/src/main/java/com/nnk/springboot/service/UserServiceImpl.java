@@ -9,6 +9,7 @@ import com.nnk.springboot.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     /**
      * Create a new user
@@ -37,7 +41,7 @@ public class UserServiceImpl implements UserService {
         }
         User newUser = User.builder()
                 .username(userDto.getUsername())
-                .password(userDto.getPassword())
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .fullname(userDto.getFullname())
                 .role(userDto.getRole())
                 .build();
@@ -94,7 +98,7 @@ public class UserServiceImpl implements UserService {
         User userToUpdate = userRepository.getById(id);
         userToUpdate.setFullname(userDto.getFullname());
         userToUpdate.setUsername(userDto.getUsername());
-        userToUpdate.setPassword(userDto.getPassword());
+        userToUpdate.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userToUpdate.setRole(userDto.getRole());
         logger.info("User updated");
         return userRepository.save(userToUpdate);
