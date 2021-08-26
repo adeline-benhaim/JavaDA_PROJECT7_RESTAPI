@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class UserServiceImplTest {
     UserServiceImpl userService;
     @InjectMocks
     DataSourceTest dataSourceTest;
+    @Mock
+    PasswordEncoder passwordEncoder;
 
     @BeforeEach
     void init() {

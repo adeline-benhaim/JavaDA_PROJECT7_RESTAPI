@@ -39,8 +39,6 @@ public class UserController {
     public String validate(@Valid @ModelAttribute UserDto userDto, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             try {
-                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-                userDto.setPassword(encoder.encode(userDto.getPassword()));
                 userService.createUser(userDto);
                 model.addAttribute("users", userService.getAllUsers());
                 return "redirect:/user/list";

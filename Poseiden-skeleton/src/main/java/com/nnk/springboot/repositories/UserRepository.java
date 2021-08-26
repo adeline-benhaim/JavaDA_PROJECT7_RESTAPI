@@ -23,4 +23,6 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
      * @return a list of all users sorted by id desc
      */
     List<User> findAllByOrderByIdDesc();
+
+    User findUserByUsername(String username);
 }

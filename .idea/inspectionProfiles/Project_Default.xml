@@ -4,7 +4,7 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="14">
+          <list size="16">
             <item index="0" class="java.lang.String" itemvalue="th:action" />
             <item index="1" class="java.lang.String" itemvalue="th:object" />
             <item index="2" class="java.lang.String" itemvalue="th:errors" />
@@ -19,6 +19,24 @@
             <item index="11" class="java.lang.String" itemvalue="href" />
             <item index="12" class="java.lang.String" itemvalue="html" />
             <item index="13" class="java.lang.String" itemvalue="center-text" />
+            <item index="14" class="java.lang.String" itemvalue="th:switch" />
+            <item index="15" class="java.lang.String" itemvalue="th:case" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="7">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="th:href" />
           </list>
         </value>
       </option>
