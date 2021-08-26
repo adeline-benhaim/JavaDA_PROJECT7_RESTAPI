@@ -92,4 +92,19 @@ public class DataSourceTest {
         tradeListMocked.addAll(Arrays.asList(trade1, trade2, trade3));
     }
 
+    /**
+     * Mock User
+     */
+    List<User> userListMocked = new ArrayList<>();
+
+    public void clearUserListMocked() {
+        userListMocked.clear();
+    }
+
+    public void createUserListMocked() {
+        User user1 = User.builder().id(1).username("username1").fullname("fullname1").password("Password1*").role("USER").build();
+        User user2 = User.builder().id(2).username("username2").fullname("fullname2").password("Password2*").role("USER").build();
+        User user3 = User.builder().id(3).username("username3").fullname("fullname3").password("Password3*").role("ADMIN").build();
+        userListMocked.addAll(Arrays.asList(user1, user2, user3));
+    }
 }

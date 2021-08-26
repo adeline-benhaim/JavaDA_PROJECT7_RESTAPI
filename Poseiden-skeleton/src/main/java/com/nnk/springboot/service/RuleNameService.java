@@ -2,8 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.Dto.RuleNameDto;
 import com.nnk.springboot.domain.RuleName;
-import javassist.NotFoundException;
-import org.springframework.transaction.annotation.Transactional;
+import com.nnk.springboot.exception.NotFoundException;
 
 import java.util.List;
 

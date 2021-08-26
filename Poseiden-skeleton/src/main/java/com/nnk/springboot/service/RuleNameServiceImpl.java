@@ -1,10 +1,10 @@
 package com.nnk.springboot.service;
 
-import com.nnk.springboot.Mapper.MapperDto;
+import com.nnk.springboot.mapper.MapperDto;
 import com.nnk.springboot.domain.Dto.RuleNameDto;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
-import javassist.NotFoundException;
+import com.nnk.springboot.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

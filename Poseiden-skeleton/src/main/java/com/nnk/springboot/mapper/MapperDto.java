@@ -1,4 +1,4 @@
-package com.nnk.springboot.Mapper;
+package com.nnk.springboot.mapper;
 
 import com.nnk.springboot.domain.*;
 import com.nnk.springboot.domain.Dto.*;
@@ -55,6 +55,16 @@ public class MapperDto {
                 .account(trade.getAccount())
                 .type(trade.getType())
                 .buyQuantity(trade.getBuyQuantity())
+                .build();
+    }
+
+    public static UserDto convertToUserDto(User user) {
+        return UserDto.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .fullname(user.getFullname())
+                .role(user.getRole())
                 .build();
     }
 }

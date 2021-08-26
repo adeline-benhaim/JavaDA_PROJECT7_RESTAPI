@@ -2,7 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Dto.BidListDto;
-import javassist.NotFoundException;
+import com.nnk.springboot.exception.NotFoundException;
 
 import java.util.List;
 

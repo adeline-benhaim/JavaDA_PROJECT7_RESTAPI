@@ -2,7 +2,7 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Dto.CurvePointDto;
-import javassist.NotFoundException;
+import com.nnk.springboot.exception.NotFoundException;
 
 import java.util.List;
 
