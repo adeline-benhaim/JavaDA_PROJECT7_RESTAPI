@@ -38,4 +38,11 @@ public interface UserService {
      * @return user updated
      */
     User updateUser(Integer id, UserDto userDto);
+
+    /**
+     * Delete a user by id
+     *
+     * @param id ID of user to delete
+     */
+    void deleteUser(Integer id);
 }

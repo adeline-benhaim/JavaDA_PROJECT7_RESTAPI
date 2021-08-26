@@ -100,4 +100,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(userToUpdate);
     }
 
+    /**
+     * Delete a user by id
+     *
+     * @param id ID of user to delete
+     */
+    @Override
+    @Transactional
+    public void deleteUser(Integer id) {
+        logger.info("Delete user : " + id);
+        if (!userRepository.existsById(id)) {
+            logger.error("Unable to delete user by id : " + id + " because doesn't exist");
+            throw new NotFoundException("User id doesn't exist");
+        }
+        logger.info("User " + id + " deleted");
+        userRepository.deleteById(id);
+    }
 }

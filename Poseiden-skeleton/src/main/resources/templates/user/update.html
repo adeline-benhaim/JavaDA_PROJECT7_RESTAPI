@@ -32,7 +32,7 @@
                         type="text" th:field="*{fullname}" class="form-control" id="fullnameInput"
                         placeholder="Full Name"
                         th:value="${userDto.fullname}">
-                <p class="label label-danger" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
+                <p class="text-danger" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                 <input
                         type="text" th:field="*{username}" class="form-control" id="usernameInput"
                         placeholder="User Name">
-                <p class="label label-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
             </div>
         </div>
 
@@ -53,9 +53,6 @@
                         type="password" th:field="*{password}" class="form-control" id="passwordInput"
                         placeholder="Password"
                         th:value="${password}">
-                <small id="passwordHelp" class="form-text text-muted">Password must consist of at least :<br>- 8
-                    characters<br>- 1 uppercase
-                    letter<br>- 1 number<br>- 1 symbol</small>
                 <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
                     <li th:each="message : ${error.split(',')}">
                         <p class="error-message" th:text="${message}"></p>

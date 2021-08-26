@@ -24,31 +24,32 @@
         <div class="row">
             <div class="form-group col-xs-6">
                 <label>Full Name</label>
-                    <input
-							type="text" th:field="*{fullname}" class="form-control" id="fullname" placeholder="Full Name">
-                    <p class="label label-danger" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
+                <input
+                        type="text" th:field="*{fullname}" class="form-control" id="fullname" placeholder="Full Name">
+                <p class="text-danger" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-xs-6">
                 <label>User Name</label>
-                    <input
-							type="text" th:field="*{username}" class="form-control" id="username" placeholder="User Name">
-                    <p class="label label-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                <input
+                        type="text" th:field="*{username}" class="form-control" id="username" placeholder="User Name">
+                <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-xs-6">
                 <label>Password</label>
-                    <input
-							type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password">
-                        <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
-                            <li th:each="message : ${error.split(',')}">
-                                <p class="error-message" th:text="${message}"></p>
-                            </li>
-                        </ul>
+                <input
+                        type="password" th:field="*{password}" class="form-control" id="password"
+                        placeholder="Password">
+                <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
+                    <li th:each="message : ${error.split(',')}">
+                        <p class="error-message" th:text="${message}"></p>
+                    </li>
+                </ul>
             </div>
         </div>
 
