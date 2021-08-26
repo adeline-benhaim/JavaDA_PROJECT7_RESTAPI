@@ -4,7 +4,7 @@ import com.nnk.springboot.config.DataSourceTest;
 import com.nnk.springboot.domain.Dto.RuleNameDto;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
-import javassist.NotFoundException;
+import com.nnk.springboot.exception.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
