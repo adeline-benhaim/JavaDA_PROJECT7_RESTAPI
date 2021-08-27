@@ -14,7 +14,7 @@
 		<h2>Update Rating</h2>
 	</div>
 
-		<form th:action="@{/rating/update/{id}(id=${ratingDtoToUpdate.id})}" th:object="${ratingDtoToUpdate}" method="post" class="form-horizontal" style="width: 100%">
+		<form th:action="@{/rating/update/{id}(id=${ratingDto.id})}" th:object="${ratingDto}" method="post" class="form-horizontal" style="width: 100%">
 
 			<div class="form-group">
 				<input
@@ -27,7 +27,8 @@
 					<input
 							type="text" th:field="*{moodysRating}" class="form-control" id="moodysRatingInput"
 							aria-describedby="moodysRatingHelp" placeholder="Moodys Rating"
-							th:value="${ratingDtoToUpdate.moodysRating}">
+							th:value="${ratingDto.moodysRating}">
+					<p th:if="${#fields.hasErrors('moodysRating')}" class="label label-danger" th:errors="*{moodysRating}"></p>
 				</div>
 			</div>
 
@@ -37,7 +38,8 @@
 					<input
 							type="text" th:field="*{sandPRating}" class="form-control" id="sandPRatingInput"
 							aria-describedby="sandPRatingHelp" placeholder="Sand P Rating"
-							th:value="${ratingDtoToUpdate.sandPRating}">
+							th:value="${ratingDto.sandPRating}">
+					<p th:if="${#fields.hasErrors('sandPRating')}" class="label label-danger" th:errors="*{sandPRating}"></p>
 				</div>
 			</div>
 
@@ -47,7 +49,8 @@
 					<input
 							type="text" th:field="*{fitchRating}" class="form-control" id="fitchRatingInput"
 							aria-describedby="fitchRatingHelp"
-							th:value="${ratingDtoToUpdate.fitchRating}">
+							th:value="${ratingDto.fitchRating}">
+					<p th:if="${#fields.hasErrors('fitchRating')}" class="label label-danger" th:errors="*{fitchRating}"></p>
 				</div>
 			</div>
 
@@ -57,7 +60,8 @@
 					<input
 							type="number" th:field="*{orderNumber}" class="form-control" id="orderNumberInput"
 							aria-describedby="orderNumberHelp"
-							th:value="${ratingDtoToUpdate.orderNumber}">
+							th:value="${ratingDto.orderNumber}">
+					<p th:if="${#fields.hasErrors('orderNumber')}" class="label label-danger" th:errors="*{orderNumber}"></p>
 				</div>
 			</div>
 

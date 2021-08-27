@@ -66,14 +66,8 @@ public class UserController {
     public String updateUser(@PathVariable("id") Integer id, @Valid UserDto userDto, BindingResult result, Model model) {
         try {
             if (!result.hasErrors()) {
-                try {
-                    userService.updateUser(id, userDto);
-                    return "redirect:/user/list";
-                } catch (AlreadyExistException e) {
-                    ObjectError errorUsername = new ObjectError("username", e.getMessage());
-                    result.addError(errorUsername);
-                    model.addAttribute("userDto", userDto);
-                }
+                userService.updateUser(id, userDto);
+                return "redirect:/user/list";
             }
             model.addAttribute("userDto", userDto);
             return "user/update";
