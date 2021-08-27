@@ -89,6 +89,7 @@ public class RatingControllerTest {
     public void postNewRatingWithErrorTest() throws Exception {
 
         RatingDto ratingDto = RatingDto.builder()
+                //@Size(max = 125, message = "125 characters maximum allowed")
                 .moodysRating("moodysRating22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222")
                 .sandPRating("sandPRating2")
                 .fitchRating("fitchRating2")
@@ -104,7 +105,8 @@ public class RatingControllerTest {
                 .andExpect(view().name("rating/add"))
                 .andExpect(status().isOk())
                 .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("ratingDto"));
+                .andExpect(model().attributeExists("ratingDto"))
+                .andReturn().getResponse().containsHeader("125 characters maximum allowed");
     }
 
     @Test
@@ -155,6 +157,7 @@ public class RatingControllerTest {
     public void postRatingToUpdateWithErrorTest() throws Exception {
 
         RatingDto ratingDto = RatingDto.builder()
+                //@Size(max = 125, message = "125 characters maximum allowed")
                 .moodysRating("moodysRating22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222")
                 .sandPRating("sandPRating2")
                 .fitchRating("fitchRating2")
@@ -170,7 +173,9 @@ public class RatingControllerTest {
                 .andExpect(view().name("rating/update"))
                 .andExpect(status().isOk())
                 .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("ratingDto"));
+                .andExpect(model().attributeExists("ratingDto"))
+                .andReturn().getResponse().containsHeader("125 characters maximum allowed");
+
     }
 
     @Test

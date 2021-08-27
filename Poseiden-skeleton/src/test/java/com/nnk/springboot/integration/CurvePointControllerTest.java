@@ -97,7 +97,8 @@ public class CurvePointControllerTest {
                 .andExpect(view().name("curvePoint/add"))
                 .andExpect(status().isOk())
                 .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("curvePointDto"));
+                .andExpect(model().attributeExists("curvePointDto"))
+                .andReturn().getResponse().containsHeader("Curve Id must not be null");
     }
 
     @Test
@@ -157,7 +158,8 @@ public class CurvePointControllerTest {
                 .andExpect(view().name("curvePoint/update"))
                 .andExpect(status().isOk())
                 .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("curvePointDto"));
+                .andExpect(model().attributeExists("curvePointDto"))
+                .andReturn().getResponse().containsHeader("Curve Id must not be null");
     }
 
     @Test

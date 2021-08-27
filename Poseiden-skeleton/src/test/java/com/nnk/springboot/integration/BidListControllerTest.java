@@ -99,7 +99,8 @@ public class BidListControllerTest {
                 .andExpect(view().name("bidList/add"))
                 .andExpect(status().isOk())
                 .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("bidListDto"));
+                .andExpect(model().attributeExists("bidListDto"))
+                .andReturn().getResponse().containsHeader("Account is mandatory");
     }
 
     @Test
@@ -161,7 +162,8 @@ public class BidListControllerTest {
                 .andExpect(view().name("bidList/update"))
                 .andExpect(status().isOk())
                 .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("bidListDto"));
+                .andExpect(model().attributeExists("bidListDto"))
+                .andReturn().getResponse().containsHeader("Account is mandatory");
     }
 
     @Test
