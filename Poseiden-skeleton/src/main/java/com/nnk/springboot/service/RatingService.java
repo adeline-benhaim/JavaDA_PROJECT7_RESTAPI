@@ -29,7 +29,7 @@ public interface RatingService {
      * @param id of the requested rating
      * @return rating found by id
      */
-    RatingDto getRatingById(Integer id) throws NotFoundException;
+    RatingDto getRatingById(Integer id);
 
     /**
      * Update a rating
@@ -38,7 +38,7 @@ public interface RatingService {
      * @param ratingDto rating's information to update
      * @return rating updated
      */
-    Rating updateRating(Integer id, RatingDto ratingDto) throws NotFoundException;
+    Rating updateRating(Integer id, RatingDto ratingDto);
 
     /**
      * Delete a rating by id

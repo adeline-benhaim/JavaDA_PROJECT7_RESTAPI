@@ -68,12 +68,12 @@ public class TradeServiceImplTest {
 
     @Test
     @DisplayName("Get existing trade by id")
-    void getExistingTradeByIdTest() throws NotFoundException {
+    void getExistingTradeByIdTest() {
 
         //GIVEN
         Mockito.when(tradeRepository.existsById(1)).thenReturn(true);
         Trade trade = dataSourceTest.getTradeListMocked().get(0);
-        Mockito.when(tradeRepository.findTradeByTradeId(1)).thenReturn(trade);
+        Mockito.when(tradeRepository.getById(1)).thenReturn(trade);
 
         //THEN
         TradeDto tradeDto = tradeService.getTradeById(1);
@@ -97,12 +97,12 @@ public class TradeServiceImplTest {
 
     @Test
     @DisplayName("Update an existing trade")
-    void updateExistingTradeTest() throws NotFoundException {
+    void updateExistingTradeTest() {
 
         //GIVEN
         Mockito.when(tradeRepository.existsById(1)).thenReturn(true);
         Trade tradeToUpdate = dataSourceTest.getTradeListMocked().get(0);
-        Mockito.when(tradeRepository.findTradeByTradeId(1)).thenReturn(tradeToUpdate);
+        Mockito.when(tradeRepository.getById(1)).thenReturn(tradeToUpdate);
         TradeDto tradeDto = TradeDto.builder().tradeId(1).account("account1Updated").type("type1Updated").buyQuantity(1d).build();
 
         //THEN

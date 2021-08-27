@@ -59,13 +59,13 @@ public class CurvePointServiceImpl implements CurvePointService {
      * @return curve point found by id
      */
     @Override
-    public CurvePointDto getCurvePointById(Integer id) throws NotFoundException {
+    public CurvePointDto getCurvePointById(Integer id) {
         logger.info("Get a curvePoint by ID");
         if (!curvePointRepository.existsById(id)) {
             logger.error("Unable to get curvePoint by id : " + id + " because doesn't exist");
             throw new NotFoundException("curvePoint id doesn't exist");
         }
-        CurvePoint curvePoint = curvePointRepository.findCurvePointById(id);
+        CurvePoint curvePoint = curvePointRepository.getById(id);
         return MapperDto.convertToCurvePointDto(curvePoint);
     }
 
@@ -78,13 +78,13 @@ public class CurvePointServiceImpl implements CurvePointService {
      */
     @Override
     @Transactional
-    public CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto) throws NotFoundException {
+    public CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto) {
         logger.info("Get curve point by id");
         if (!curvePointRepository.existsById(id)) {
             logger.error("Unable to get curvePoint by id : " + id + " because doesn't exist");
             throw new NotFoundException("curvePoint id doesn't exist");
         }
-        CurvePoint curvePointToUpdate = curvePointRepository.findCurvePointById(id);
+        CurvePoint curvePointToUpdate = curvePointRepository.getById(id);
         curvePointToUpdate.setCurveId(curvePointDto.getCurveId());
         curvePointToUpdate.setTerm(curvePointDto.getTerm());
         curvePointToUpdate.setValue(curvePointDto.getValue());

@@ -28,7 +28,7 @@ public interface RuleNameService {
      * @param id of the requested rule
      * @return rule found by id
      */
-    RuleNameDto getRuleNameById(Integer id) throws NotFoundException;
+    RuleNameDto getRuleNameById(Integer id);
 
     /**
      * Update a rule
@@ -37,7 +37,7 @@ public interface RuleNameService {
      * @param ruleNameDto rule information to update
      * @return rule updated
      */
-    RuleName updateRuleName(Integer id, RuleNameDto ruleNameDto) throws NotFoundException;
+    RuleName updateRuleName(Integer id, RuleNameDto ruleNameDto);
 
     /**
      * Delete a rule by id

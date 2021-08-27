@@ -15,13 +15,4 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
      * @return a list of all ratings sorted by id desc
      */
     List<Rating> findAllByOrderByIdDesc();
-
-    /**
-     * Find a rating
-     *
-     * @param id of the requested rating
-     * @return rating found by id
-     */
-    Rating findRatingById(Integer id);
-
 }

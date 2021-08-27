@@ -59,13 +59,13 @@ public class TradeServiceImpl implements TradeService {
      * @throws NotFoundException if trade id doesn't exist
      */
     @Override
-    public TradeDto getTradeById(Integer id) throws NotFoundException {
+    public TradeDto getTradeById(Integer id) {
         logger.info("Get a trade by ID");
         if (!tradeRepository.existsById(id)) {
             logger.error("Unable to get trade by id : " + id + " because doesn't exist");
             throw new NotFoundException("Trade id doesn't exist");
         }
-        Trade trade = tradeRepository.findTradeByTradeId(id);
+        Trade trade = tradeRepository.getById(id);
         return MapperDto.convertToTradeDto(trade);
     }
 
@@ -79,13 +79,13 @@ public class TradeServiceImpl implements TradeService {
      */
     @Override
     @Transactional
-    public Trade updateTrade(Integer id, TradeDto tradeDto) throws NotFoundException {
+    public Trade updateTrade(Integer id, TradeDto tradeDto) {
         logger.info("Get a trade by ID");
         if (!tradeRepository.existsById(id)) {
             logger.error("Unable to get trade by id : " + id + " because doesn't exist");
             throw new NotFoundException("Trade id doesn't exist");
         }
-        Trade tradeToUpdate = tradeRepository.findTradeByTradeId(id);
+        Trade tradeToUpdate = tradeRepository.getById(id);
         tradeToUpdate.setAccount(tradeDto.getAccount());
         tradeToUpdate.setType(tradeDto.getType());
         tradeToUpdate.setBuyQuantity(tradeDto.getBuyQuantity());

@@ -16,13 +16,17 @@
     <form th:action="@{/user/update/{id}(id=${userDto.id})}" th:object="${userDto}" method="post"
           class="form-horizontal" style="width: 100%">
 
+        <div class="row">
+            <div class="form-group col-xs-6">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('global')}">
+                    <p th:errors="*{global}"></p>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group">
             <input
                     type="hidden" th:field="*{id}" class="form-control">
-        </div>
-
-        <div class="alert alert-danger" th:if="${#fields.hasErrors('global')}">
-            <p th:errors="*{global}"></p>
         </div>
 
         <div class="row">

@@ -68,12 +68,12 @@ public class CurvePointServiceImplTest {
 
     @Test
     @DisplayName("Get existing curve point by id")
-    void getExistingCurvePintByIdTest() throws NotFoundException {
+    void getExistingCurvePintByIdTest() {
 
         //GIVEN
         Mockito.when(curvePointRepository.existsById(1)).thenReturn(true);
         CurvePoint curvePoint = dataSourceTest.getCurvePointListMocked().get(0);
-        Mockito.when(curvePointRepository.findCurvePointById(1)).thenReturn(curvePoint);
+        Mockito.when(curvePointRepository.getById(1)).thenReturn(curvePoint);
 
         //THEN
         CurvePointDto curvePointDto = curvePointService.getCurvePointById(1);
@@ -97,12 +97,12 @@ public class CurvePointServiceImplTest {
 
     @Test
     @DisplayName("Update an existing curve point")
-    void updateExistingCurvePointTest() throws NotFoundException {
+    void updateExistingCurvePointTest() {
 
         //GIVEN
         Mockito.when(curvePointRepository.existsById(1)).thenReturn(true);
         CurvePoint curvePointToUpdate = dataSourceTest.getCurvePointListMocked().get(0);
-        Mockito.when(curvePointRepository.findCurvePointById(1)).thenReturn(curvePointToUpdate);
+        Mockito.when(curvePointRepository.getById(1)).thenReturn(curvePointToUpdate);
         CurvePointDto curvePointDto = CurvePointDto.builder().id(1).curveId(10).term(10d).value(10d).build();
 
         //THEN

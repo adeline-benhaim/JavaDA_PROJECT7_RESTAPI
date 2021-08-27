@@ -59,13 +59,13 @@ public class RatingServiceImpl implements RatingService {
      * @return rating found by id
      */
     @Override
-    public  RatingDto getRatingById(Integer id) throws NotFoundException {
+    public  RatingDto getRatingById(Integer id) {
         logger.info("Get a rating by ID");
         if (!ratingRepository.existsById(id)){
             logger.error("Unable to get rating by id : " + id + " because doesn't exist");
             throw new NotFoundException("Rating id doesn't exist");
         }
-        Rating rating = ratingRepository.findRatingById(id);
+        Rating rating = ratingRepository.getById(id);
         return MapperDto.convertToRatingDto(rating);
     }
 
@@ -77,13 +77,13 @@ public class RatingServiceImpl implements RatingService {
      */
     @Override
     @Transactional
-    public Rating updateRating(Integer id, RatingDto ratingDto) throws NotFoundException {
+    public Rating updateRating(Integer id, RatingDto ratingDto) {
         logger.info("Get a rating by ID");
         if (!ratingRepository.existsById(id)){
             logger.error("Unable to get rating by id : " + id + " because doesn't exist");
             throw new NotFoundException("Rating id doesn't exist");
         }
-        Rating ratingToUpdate = ratingRepository.findRatingById(id);
+        Rating ratingToUpdate = ratingRepository.getById(id);
         ratingToUpdate.setMoodysRating(ratingDto.getMoodysRating());
         ratingToUpdate.setSandPRating(ratingDto.getSandPRating());
         ratingToUpdate.setFitchRating(ratingDto.getFitchRating());

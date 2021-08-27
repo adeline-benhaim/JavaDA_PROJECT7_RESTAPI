@@ -95,6 +95,10 @@ public class UserServiceImpl implements UserService {
             logger.error("Unable to get user by id : " + id + " because doesn't exist");
             throw new NotFoundException("User id doesn't exist");
         }
+        if (userRepository.existsByUsername(userDto.getUsername())) {
+            logger.error("Unable to update this user because username : " + userDto.getUsername() + " already exist");
+            throw new AlreadyExistException("Unable to update this user because username : " + userDto.getUsername() + " already exist");
+        }
         User userToUpdate = userRepository.getById(id);
         userToUpdate.setFullname(userDto.getFullname());
         userToUpdate.setUsername(userDto.getUsername());

@@ -5,7 +5,6 @@ import com.nnk.springboot.exception.AlreadyExistException;
 import com.nnk.springboot.exception.NotFoundException;
 import com.nnk.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,8 +66,14 @@ public class UserController {
     public String updateUser(@PathVariable("id") Integer id, @Valid UserDto userDto, BindingResult result, Model model) {
         try {
             if (!result.hasErrors()) {
-                userService.updateUser(id, userDto);
-                return "redirect:/user/list";
+                try {
+                    userService.updateUser(id, userDto);
+                    return "redirect:/user/list";
+                } catch (AlreadyExistException e) {
+                    ObjectError errorUsername = new ObjectError("username", e.getMessage());
+                    result.addError(errorUsername);
+                    model.addAttribute("userDto", userDto);
+                }
             }
             model.addAttribute("userDto", userDto);
             return "user/update";
@@ -76,6 +81,7 @@ public class UserController {
             return "notFound";
         }
     }
+
 
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id) {

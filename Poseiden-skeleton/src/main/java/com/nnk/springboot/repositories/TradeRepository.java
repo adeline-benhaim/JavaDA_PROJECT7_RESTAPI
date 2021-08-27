@@ -15,12 +15,4 @@ public interface TradeRepository extends JpaRepository<Trade, Integer> {
      * @return a list of all trades sorted by id desc
      */
     List<Trade> findAllByOrderByTradeIdDesc();
-
-    /**
-     * Find a trade
-     *
-     * @param id of the requested trade
-     * @return trade found by id
-     */
-    Trade findTradeByTradeId(Integer id);
 }

@@ -69,12 +69,12 @@ public class RatingServiceImplTest {
 
     @Test
     @DisplayName("Get existing rating by id")
-    void getExistingRatingByIdTest() throws NotFoundException {
+    void getExistingRatingByIdTest() {
 
         //GIVEN
         Mockito.when(ratingRepository.existsById(1)).thenReturn(true);
         Rating rating = dataSourceTest.getRatingListMocked().get(0);
-        Mockito.when(ratingRepository.findRatingById(1)).thenReturn(rating);
+        Mockito.when(ratingRepository.getById(1)).thenReturn(rating);
 
         //THEN
         RatingDto ratingDto = ratingService.getRatingById(1);
@@ -98,12 +98,12 @@ public class RatingServiceImplTest {
 
     @Test
     @DisplayName("Update an existing rating")
-    void updateExistingRatingTest() throws NotFoundException {
+    void updateExistingRatingTest() {
 
         //GIVEN
         Mockito.when(ratingRepository.existsById(1)).thenReturn(true);
         Rating ratingToUpdate = dataSourceTest.getRatingListMocked().get(0);
-        Mockito.when(ratingRepository.findRatingById(1)).thenReturn(ratingToUpdate);
+        Mockito.when(ratingRepository.getById(1)).thenReturn(ratingToUpdate);
         RatingDto ratingDto = RatingDto.builder().id(1).moodysRating("moodysRating1Updated").sandPRating("sandPRating1Updated").fitchRating("fitchRating1Updated").orderNumber(1).build();
 
         //THEN
