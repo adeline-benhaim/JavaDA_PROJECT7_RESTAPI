@@ -1,4 +1,4 @@
-package com.nnk.springboot.integration.bidList;
+package com.nnk.springboot.integration;
 
 import com.nnk.springboot.domain.Dto.BidListDto;
 import com.nnk.springboot.exception.NotFoundException;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @WithMockUser(username = "user", password = "123456Aa*", roles = "USER")
 @AutoConfigureMockMvc(addFilters = false)
-public class BidListControllerUserRoleTest {
+public class BidListControllerTest {
 
     @Autowired
     MockMvc mockMvc;
