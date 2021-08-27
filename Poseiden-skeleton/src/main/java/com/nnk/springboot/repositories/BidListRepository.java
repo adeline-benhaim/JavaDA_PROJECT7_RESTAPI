@@ -15,13 +15,4 @@ public interface BidListRepository extends JpaRepository<BidList, Integer> {
      * @return a list of all bids sorted by id desc
      */
     List<BidList> findAllByOrderByBidListIdDesc();
-
-    /**
-     * Find a bid by Id
-     *
-     * @param BidListId bid id sought
-     * @return the bid found
-     */
-    BidList findBidListByBidListId(Integer BidListId);
-
 }

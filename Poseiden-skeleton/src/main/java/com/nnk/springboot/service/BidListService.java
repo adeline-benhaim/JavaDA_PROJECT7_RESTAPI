@@ -2,7 +2,6 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Dto.BidListDto;
-import com.nnk.springboot.exception.NotFoundException;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public interface BidListService {
      * @param id of the requested bid
      * @return bid found by id
      */
-    BidListDto getBidListById(Integer id) throws NotFoundException;
+    BidListDto getBidListById(Integer id);
 
     /**
      * Update a bid
@@ -38,7 +37,7 @@ public interface BidListService {
      * @param bidListDto bid to update
      * @return bid updated
      */
-    BidList updateBidList(Integer id, BidListDto bidListDto) throws NotFoundException;
+    BidList updateBidList(Integer id, BidListDto bidListDto);
 
     /**
      * Delete a bid by Id

@@ -68,12 +68,12 @@ public class RuleNameServiceImplTest {
 
     @Test
     @DisplayName("Get existing ruleName by id")
-    void getExistingRuleNameByIdTest() throws NotFoundException {
+    void getExistingRuleNameByIdTest() {
 
         //GIVEN
         Mockito.when(ruleNameRepository.existsById(1)).thenReturn(true);
         RuleName ruleName = dataSourceTest.getRuleNameListMocked().get(0);
-        Mockito.when(ruleNameRepository.findRuleNameById(1)).thenReturn(ruleName);
+        Mockito.when(ruleNameRepository.getById(1)).thenReturn(ruleName);
 
         //THEN
         RuleNameDto ruleNameDto = ruleNameService.getRuleNameById(1);
@@ -97,12 +97,12 @@ public class RuleNameServiceImplTest {
 
     @Test
     @DisplayName("Update an existing ruleName")
-    void updateExistingRuleNameTest() throws NotFoundException {
+    void updateExistingRuleNameTest() {
 
         //GIVEN
         Mockito.when(ruleNameRepository.existsById(1)).thenReturn(true);
         RuleName ruleNameToUpdate = dataSourceTest.getRuleNameListMocked().get(0);
-        Mockito.when(ruleNameRepository.findRuleNameById(1)).thenReturn(ruleNameToUpdate);
+        Mockito.when(ruleNameRepository.getById(1)).thenReturn(ruleNameToUpdate);
         RuleNameDto ruleNameDto = RuleNameDto.builder().id(1).name("name1Updated").description("description1Updated").json("json1Updated").template("template1Updated").sqlStr("sqlStr1Updated").sqlPart("sqlPart1Updated").build();
 
         //THEN

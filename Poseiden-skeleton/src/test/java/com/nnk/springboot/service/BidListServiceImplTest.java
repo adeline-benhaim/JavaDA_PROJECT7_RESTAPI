@@ -68,12 +68,12 @@ public class BidListServiceImplTest {
 
     @Test
     @DisplayName("Get existing bid by id")
-    void getExistingBidByIdTest() throws NotFoundException {
+    void getExistingBidByIdTest() {
 
         //GIVEN
         Mockito.when(bidListRepository.existsById(1)).thenReturn(true);
         BidList bidList = dataSourceTest.getBidListListMocked().get(0);
-        Mockito.when(bidListRepository.findBidListByBidListId(1)).thenReturn(bidList);
+        Mockito.when(bidListRepository.getById(1)).thenReturn(bidList);
 
         //THEN
         BidListDto bidListDto = bidListService.getBidListById(1);
@@ -97,12 +97,12 @@ public class BidListServiceImplTest {
 
     @Test
     @DisplayName("Update an existing bid")
-    void updateExistingBidTest() throws NotFoundException {
+    void updateExistingBidTest() {
 
         //GIVEN
         Mockito.when(bidListRepository.existsById(1)).thenReturn(true);
         BidList bidToUpdate = dataSourceTest.getBidListListMocked().get(0);
-        Mockito.when(bidListRepository.findBidListByBidListId(1)).thenReturn(bidToUpdate);
+        Mockito.when(bidListRepository.getById(1)).thenReturn(bidToUpdate);
         BidListDto bidListDto = BidListDto.builder().bidListId(1).account("account1Updated").type("type1Updated").bidQuantity(1d).build();
 
         //THEN

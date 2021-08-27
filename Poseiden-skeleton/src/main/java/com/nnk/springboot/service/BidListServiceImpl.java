@@ -59,13 +59,13 @@ public class BidListServiceImpl implements BidListService {
      * @return bid found by id
      */
     @Override
-    public BidListDto getBidListById(Integer id) throws NotFoundException {
+    public BidListDto getBidListById(Integer id) {
         logger.info("Get a bidList by ID");
         if (!bidListRepository.existsById(id)) {
             logger.error("Unable to get bid by id : " + id + " because doesn't exist");
             throw new NotFoundException("Bid id doesn't exist");
         }
-        BidList bidList = bidListRepository.findBidListByBidListId(id);
+        BidList bidList = bidListRepository.getById(id);
         return MapperDto.convertToBidListDto(bidList);
     }
 
@@ -78,13 +78,13 @@ public class BidListServiceImpl implements BidListService {
      */
     @Override
     @Transactional
-    public BidList updateBidList(Integer id, BidListDto bidListDto) throws NotFoundException {
+    public BidList updateBidList(Integer id, BidListDto bidListDto) {
         logger.info("Get bidList by id");
         if (!bidListRepository.existsById(id)) {
             logger.error("Unable to get bid by id : " + id + " because doesn't exist");
             throw new NotFoundException("Bid id doesn't exist");
         }
-        BidList bidListToUpdate = bidListRepository.findBidListByBidListId(id);
+        BidList bidListToUpdate = bidListRepository.getById(id);
         bidListToUpdate.setAccount(bidListDto.getAccount());
         bidListToUpdate.setType(bidListDto.getType());
         bidListToUpdate.setBidQuantity(bidListDto.getBidQuantity());

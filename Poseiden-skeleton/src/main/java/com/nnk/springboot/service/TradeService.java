@@ -30,7 +30,7 @@ public interface TradeService {
      * @return trade found by id
      * @throws NotFoundException if trade id doesn't exist
      */
-    TradeDto getTradeById(Integer id) throws NotFoundException;
+    TradeDto getTradeById(Integer id);
 
     /**
      * Update a trade
@@ -40,7 +40,7 @@ public interface TradeService {
      * @return trade updated
      * @throws NotFoundException if trade id doesn't exist
      */
-    Trade updateTrade(Integer id, TradeDto tradeDto) throws NotFoundException;
+    Trade updateTrade(Integer id, TradeDto tradeDto);
 
     /**
      * Delete a trade by id

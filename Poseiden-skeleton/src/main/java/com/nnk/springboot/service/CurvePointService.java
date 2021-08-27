@@ -29,7 +29,7 @@ public interface CurvePointService {
      * @param id of the requested curve point
      * @return curve point found by id
      */
-    CurvePointDto getCurvePointById(Integer id) throws NotFoundException;
+    CurvePointDto getCurvePointById(Integer id);
 
     /**
      * Update a curve point
@@ -38,7 +38,7 @@ public interface CurvePointService {
      * @param curvePointDto curve point to update
      * @return curve point updated
      */
-    CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto) throws NotFoundException;
+    CurvePoint updateCurvePoint(Integer id, CurvePointDto curvePointDto);
 
     /**
      * Delete a curve point by id

@@ -147,6 +147,21 @@ public class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("Try to update an already exist username user throw AlreadyExistException")
+    void updateAlreadyExistUserTest() {
+
+        //GIVEN
+        Mockito.when(userRepository.existsById(5)).thenReturn(true);
+        Mockito.when(userRepository.existsByUsername("username1Updated")).thenReturn(true);
+        UserDto userDto = UserDto.builder().id(1).username("username1Updated").fullname("fullname1Updated").password("Password1*Updated").role("USER").build();
+
+        //THEN
+
+        //WHEN
+        assertThrows(AlreadyExistException.class, () -> userService.updateUser(5, userDto));
+    }
+
+    @Test
     @DisplayName("Delete a user")
     void deleteUserTest() {
 
