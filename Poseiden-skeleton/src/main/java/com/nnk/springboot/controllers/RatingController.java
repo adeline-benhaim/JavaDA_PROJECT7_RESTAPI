@@ -46,7 +46,7 @@ public class RatingController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         try {
             RatingDto ratingDtoToUpdate = ratingService.getRatingById(id);
-            model.addAttribute("ratingDtoToUpdate", ratingDtoToUpdate);
+            model.addAttribute("ratingDto", ratingDtoToUpdate);
             return "rating/update";
         } catch (NotFoundException e) {
             return "notFound";
@@ -62,7 +62,7 @@ public class RatingController {
                 return "redirect:/rating/list";
             }
             model.addAttribute("ratingDto", ratingDto);
-            return "redirect:/rating/update/{id}";
+            return "rating/update";
         } catch (NotFoundException e) {
             return "notFound";
         }
