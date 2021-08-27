@@ -161,7 +161,8 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/update"))
                 .andExpect(status().isOk())
                 .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("tradeDto"));
+                .andExpect(model().attributeExists("tradeDto"))
+                .andReturn().getResponse().containsHeader("30 characters maximum allowed");
     }
 
     @Test
