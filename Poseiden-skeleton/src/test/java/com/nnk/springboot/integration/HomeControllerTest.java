@@ -9,8 +9,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -60,38 +58,6 @@ public class HomeControllerTest {
         mockMvc.perform(get("/admin/home"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
-    }
-
-    @Test
-    public void userLoginTest() throws Exception {
-        mockMvc.perform(formLogin("/login")
-                .user("user")
-                .password("123456Aa*"))
-                .andExpect(authenticated());
-    }
-
-    @Test
-    public void userLoginFailTest() throws Exception {
-        mockMvc.perform(formLogin("/login")
-                .user("user")
-                .password("wrongPassword"))
-                .andExpect(unauthenticated());
-    }
-
-    @Test
-    public void adminLoginTest() throws Exception {
-        mockMvc.perform(formLogin("/login")
-                .user("admin")
-                .password("123456Aa*"))
-                .andExpect(authenticated());
-    }
-
-    @Test
-    public void adminLoginFailTest() throws Exception {
-        mockMvc.perform(formLogin("/login")
-                .user("admin")
-                .password("wrongPassword"))
-                .andExpect(unauthenticated());
     }
 
 }
