@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @ActiveProfiles("test")
-@WithMockUser(username = "user", password = "123456Aa*", roles = "USER")
+@WithMockUser(username = "admin", password = "123456Aa*", roles = "ADMIN")
 @AutoConfigureMockMvc(addFilters = false)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class UserControllerTest {
