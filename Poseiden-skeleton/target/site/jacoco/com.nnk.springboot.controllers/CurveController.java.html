@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurveController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.controllers</a> &gt; <span class="el_source">CurveController.java</span></div><h1>CurveController.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.controllers;
+
+import com.nnk.springboot.domain.Dto.CurvePointDto;
+import com.nnk.springboot.service.CurvePointService;
+import com.nnk.springboot.exception.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@Controller
+<span class="fc" id="L16">public class CurveController {</span>
+
+    @Autowired
+    private CurvePointService curvePointService;
+
+    @RequestMapping(&quot;/curvePoint/list&quot;)
+    public String home(Model model) {
+<span class="fc" id="L23">        List&lt;CurvePointDto&gt; curvePointDtoList = curvePointService.getAllCurvePoints();</span>
+<span class="fc" id="L24">        model.addAttribute(&quot;curvePointDtoList&quot;, curvePointDtoList);</span>
+<span class="fc" id="L25">        return &quot;curvePoint/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/curvePoint/add&quot;)
+    public String addCurvePointForm(Model model) {
+<span class="fc" id="L30">        CurvePointDto curvePointDto = new CurvePointDto();</span>
+<span class="fc" id="L31">        model.addAttribute(&quot;curvePointDto&quot;, curvePointDto);</span>
+<span class="fc" id="L32">        return &quot;curvePoint/add&quot;;</span>
+    }
+
+    @PostMapping(&quot;/curvePoint/validate&quot;)
+    public String validate(@Valid @ModelAttribute CurvePointDto curvePointDto, BindingResult result, Model model) {
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L38">            curvePointService.createCurvePoint(curvePointDto);</span>
+<span class="fc" id="L39">            return &quot;redirect:/curvePoint/list&quot;;</span>
+        }
+<span class="fc" id="L41">        model.addAttribute(&quot;curvePointDto&quot;, curvePointDto);</span>
+<span class="fc" id="L42">        return &quot;curvePoint/add&quot;;</span>
+    }
+
+    @GetMapping(&quot;/curvePoint/update/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+        try {
+<span class="fc" id="L48">            CurvePointDto curvePointDtoToUpdate = curvePointService.getCurvePointById(id);</span>
+<span class="fc" id="L49">            model.addAttribute(&quot;curvePointDto&quot;, curvePointDtoToUpdate);</span>
+<span class="fc" id="L50">            return &quot;curvePoint/update&quot;;</span>
+<span class="fc" id="L51">        } catch (NotFoundException e) {</span>
+<span class="fc" id="L52">            return &quot;notFound&quot;;</span>
+        }
+    }
+
+    @PostMapping(&quot;/curvePoint/update/{id}&quot;)
+    public String updateCurvePoint(@PathVariable(&quot;id&quot;) Integer id, @Valid CurvePointDto curvePointDto,
+                            BindingResult result, Model model) {
+        try {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            if (!result.hasErrors()) {</span>
+<span class="fc" id="L61">                curvePointService.updateCurvePoint(id, curvePointDto);</span>
+<span class="fc" id="L62">                return &quot;redirect:/curvePoint/list&quot;;</span>
+            }
+<span class="fc" id="L64">            model.addAttribute(&quot;curvePointDto&quot;, curvePointDto);</span>
+<span class="fc" id="L65">            return &quot;curvePoint/update&quot;;</span>
+<span class="fc" id="L66">        } catch (NotFoundException e) {</span>
+<span class="fc" id="L67">            return &quot;notFound&quot;;</span>
+        }
+    }
+
+    @GetMapping(&quot;/curvePoint/delete/{id}&quot;)
+    public String deleteCurvePoint(@PathVariable(&quot;id&quot;) Integer id) {
+<span class="fc" id="L73">        curvePointService.deleteCurvePoint(id);</span>
+<span class="fc" id="L74">        return &quot;redirect:/curvePoint/list&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

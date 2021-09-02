@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BidList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.domain</a> &gt; <span class="el_source">BidList.java</span></div><h1>BidList.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.domain;
+
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
+
+@Entity
+@Getter
+<span class="pc" id="L12">@Setter</span>
+<span class="pc" id="L13">@Builder</span>
+<span class="fc" id="L14">@NoArgsConstructor</span>
+<span class="fc" id="L15">@AllArgsConstructor</span>
+@DynamicUpdate
+@Table(name = &quot;bidlist&quot;)
+public class BidList {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;bid_list_id&quot;)
+<span class="fc" id="L23">    private Integer bidListId;</span>
+
+    @NotBlank(message = &quot;Account is mandatory&quot;)
+<span class="fc" id="L26">    private String account;</span>
+
+    @NotBlank(message = &quot;Type is mandatory&quot;)
+<span class="fc" id="L29">    private String type;</span>
+
+    @Column(name = &quot;bid_quantity&quot;)
+<span class="fc" id="L32">    private Double bidQuantity;</span>
+
+    @Column(name = &quot;ask_quantity&quot;)
+<span class="nc" id="L35">    private Double askQuantity;</span>
+
+<span class="nc" id="L37">    private Double bid;</span>
+
+<span class="nc" id="L39">    private Double ask;</span>
+
+<span class="nc" id="L41">    private String benchmark;</span>
+
+    @Column(name = &quot;bid_list_date&quot;)
+<span class="nc" id="L44">    private Timestamp bidListDate;</span>
+
+<span class="nc" id="L46">    private String commentary;</span>
+
+<span class="nc" id="L48">    private String security;</span>
+
+<span class="nc" id="L50">    private String status;</span>
+
+<span class="nc" id="L52">    private String trader;</span>
+
+<span class="nc" id="L54">    private String book;</span>
+
+    @Column(name = &quot;creation_name&quot;)
+<span class="nc" id="L57">    private String creationName;</span>
+
+    @Column(name = &quot;creation_date&quot;)
+<span class="nc" id="L60">    private Timestamp creationDate;</span>
+
+    @Column(name = &quot;revision_name&quot;)
+<span class="nc" id="L63">    private String revisionName;</span>
+
+    @Column(name = &quot;revision_date&quot;)
+<span class="nc" id="L66">    private Timestamp revisionDate;</span>
+
+    @Column(name = &quot;deal_name&quot;)
+<span class="nc" id="L69">    private String dealName;</span>
+
+    @Column(name = &quot;deal_type&quot;)
+<span class="nc" id="L72">    private String dealType;</span>
+
+    @Column(name = &quot;source_list_id&quot;)
+<span class="nc" id="L75">    private String sourceListId;</span>
+
+<span class="nc" id="L77">    private String side;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RatingController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.controllers</a> &gt; <span class="el_source">RatingController.java</span></div><h1>RatingController.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.controllers;
+
+import com.nnk.springboot.domain.Dto.RatingDto;
+import com.nnk.springboot.service.RatingService;
+import com.nnk.springboot.exception.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@Controller
+<span class="fc" id="L16">public class RatingController {</span>
+
+    @Autowired
+    private RatingService ratingService;
+
+    @RequestMapping(&quot;/rating/list&quot;)
+    public String home(Model model) {
+<span class="fc" id="L23">        List&lt;RatingDto&gt; ratingDtoList = ratingService.getAllRatings();</span>
+<span class="fc" id="L24">        model.addAttribute(&quot;ratingDtoList&quot;, ratingDtoList);</span>
+<span class="fc" id="L25">        return &quot;rating/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/rating/add&quot;)
+    public String addRatingForm(Model model) {
+<span class="fc" id="L30">        RatingDto ratingDto = new RatingDto();</span>
+<span class="fc" id="L31">        model.addAttribute(&quot;ratingDto&quot;, ratingDto);</span>
+<span class="fc" id="L32">        return &quot;rating/add&quot;;</span>
+    }
+
+    @PostMapping(&quot;/rating/validate&quot;)
+    public String validate(@Valid @ModelAttribute RatingDto ratingDto, BindingResult result, Model model) {
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L38">            ratingService.createRating(ratingDto);</span>
+<span class="fc" id="L39">            return &quot;redirect:/rating/list&quot;;</span>
+        }
+<span class="fc" id="L41">        model.addAttribute(&quot;ratingDto&quot;, ratingDto);</span>
+<span class="fc" id="L42">        return &quot;rating/add&quot;;</span>
+    }
+
+    @GetMapping(&quot;/rating/update/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+        try {
+<span class="fc" id="L48">            RatingDto ratingDtoToUpdate = ratingService.getRatingById(id);</span>
+<span class="fc" id="L49">            model.addAttribute(&quot;ratingDto&quot;, ratingDtoToUpdate);</span>
+<span class="fc" id="L50">            return &quot;rating/update&quot;;</span>
+<span class="fc" id="L51">        } catch (NotFoundException e) {</span>
+<span class="fc" id="L52">            return &quot;notFound&quot;;</span>
+        }
+    }
+
+    @PostMapping(&quot;/rating/update/{id}&quot;)
+    public String updateRating(@PathVariable(&quot;id&quot;) Integer id, @Valid RatingDto ratingDto,
+                               BindingResult result, Model model) {
+        try {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            if (!result.hasErrors()) {</span>
+<span class="fc" id="L61">                ratingService.updateRating(id, ratingDto);</span>
+<span class="fc" id="L62">                return &quot;redirect:/rating/list&quot;;</span>
+            }
+<span class="fc" id="L64">            model.addAttribute(&quot;ratingDto&quot;, ratingDto);</span>
+<span class="fc" id="L65">            return &quot;rating/update&quot;;</span>
+<span class="fc" id="L66">        } catch (NotFoundException e) {</span>
+<span class="fc" id="L67">            return &quot;notFound&quot;;</span>
+        }
+    }
+
+    @GetMapping(&quot;/rating/delete/{id}&quot;)
+    public String deleteRating(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="fc" id="L73">        ratingService.deleteRating(id);</span>
+<span class="fc" id="L74">        return &quot;redirect:/rating/list&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

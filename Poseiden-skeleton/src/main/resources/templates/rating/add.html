@@ -26,6 +26,7 @@
 					<input
 							type="text" th:field="*{moodysRating}" class="form-control" id="moodysRatingInput"
 							aria-describedby="moodysRatingHelp" placeholder="Moodys Rating">
+					<p th:if="${#fields.hasErrors('moodysRating')}" class="label label-danger" th:errors="*{moodysRating}"></p>
 				</div>
 			</div>
 
@@ -35,6 +36,7 @@
 					<input
 							type="text" th:field="*{sandPRating}" class="form-control" id="sandPRatingInput"
 							aria-describedby="sandPRatingHelp" placeholder="Sand P Rating">
+					<p th:if="${#fields.hasErrors('sandPRating')}" class="label label-danger" th:errors="*{sandPRating}"></p>
 				</div>
 			</div>
 
@@ -44,6 +46,7 @@
 					<input
 							type="text" th:field="*{fitchRating}" class="form-control" id="fitchRatingInput"
 							aria-describedby="fitchRatingHelp" placeholder="Fitch Rating">
+					<p th:if="${#fields.hasErrors('fitchRating')}" class="label label-danger" th:errors="*{fitchRating}"></p>
 				</div>
 			</div>
 
